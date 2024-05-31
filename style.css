@@ -1,6 +1,47 @@
 /* Importing Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+
+
+
+#hello {
+  margin: 20px;
+}
+
+.jira-logo {
+  position: relative;
+  width: 42px; /* Adjust based on SVG width */
+  height: 42px; /* Adjust based on SVG height */
+  margin: 50px auto; /* Center align the logo section */
+  right: 600px;
+}
+
+.jira-logo svg {
+  position: absolute;
+  width: 50%; /* Adjust the size of the icons as needed */
+  height: 50%; /* Adjust the size of the icons as needed */
+}
+
+#svg-jira-logo-upper-element {
+  position: absolute;
+  right: 0%;
+}
+
+#svg-jira-logo-middle-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#svg-jira-logo-bottom-element {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+}
+
+
+
 * {
   margin: 0;
   padding: 0;
@@ -16,16 +57,18 @@ body {
 .sidebar {
   position: fixed;
   border-radius: 0 10px 10px 0;
-  top: 10%;
+  top: 7%;
   left: 0;
-  height: 80%;
+  height: 90vh; /* Изменено здесь */
   width: 85px;
   display: flex;
+  /* display: none; */
   overflow-x: hidden;
   flex-direction: column;
   background: #161a2d;
   padding: 25px 20px;
-  transition: all 0.4s ease;
+  /* transition: all 0.4s ease; */
+  transition: width 0.4s ease; /* Изменено здесь */
 }
 
 .sidebar:hover {
@@ -39,7 +82,6 @@ body {
 
 .sidebar .sidebar-header img {
   width: 42px;
-  border-radius: 50%;
 }
 
 .sidebar .sidebar-header h2 {
@@ -150,4 +192,25 @@ body {
 .sidebar:hover .user-account {
   background: #fff;
   border-radius: 4px;
+}
+
+#sprint {
+    background-color: #4f52ba;
+    border-radius: 5px;
+    width: 50%;
+    right: inherit;
+}
+
+.popupProjectsList {
+  position: absolute;
+  background-color: red;
+  width: 200px;
+  top: 0;
+  /* background-color: #fff; */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+li:hover .popup {
+  /* display: block; */
 }
