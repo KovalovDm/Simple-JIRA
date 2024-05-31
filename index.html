@@ -14,52 +14,37 @@
 </head>
 
 <body>
-    <p id="hello">hello</p>
-
-    <div class="jira-logo">
-         <!-- bottom jira part-->
-         <div class="jira-logo-part">
-            <svg id="svg-jira-logo-bottom-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1162">
-                <path fill="url(#a)" d="M1075.81.678H.903c0 267.986 217.254 485.231 485.232 485.231h198.631v191.174C684.941 944.58 901.565 1161.49 1169.07 1162V93.935c0-51.503-41.75-93.257-93.26-93.257Z"/>
-                <defs>
-                <linearGradient id="a" x1="300246" x2="166109" y1="1511.68" y2="149319" gradientUnits="userSpaceOnUse">
-                    <stop offset=".18" stop-color="#0052CC"/>
-                    <stop offset="1" stop-color="#2684FF"/>
-                </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
-        <!-- middle jira part-->
-        <div class="jira-logo-part">
-            <svg id="svg-jira-logo-middle-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1169 1162">
-                <path fill="url(#a)" d="M1074.98.395H.082C.248 268.137 217.248 485.146 485 485.32h198.01v191.796c.341 267.741 217.489 484.604 485.23 484.604V93.661c0-51.503-41.75-93.266-93.26-93.266Z"/>
-                <defs>
-                <linearGradient id="a" x1="292386" x2="176425" y1="535.062" y2="136052" gradientUnits="userSpaceOnUse">
-                    <stop offset=".18" stop-color="#0052CC"/>
-                    <stop offset="1" stop-color="#2684FF"/>
-                </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
-        <!-- upper jira part-->
-        <div class="jira-logo-part">
-            <svg id="svg-jira-logo-upper-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1163">
-                <path fill="#2684FF" d="M1075.85.807H.938a485.232 485.232 0 0 0 485.231 485.231H684.18v191.183c.175 267.742 217.175 484.749 484.92 484.929V94.055c0-51.485-41.74-93.248-93.25-93.248Z"/>
-            </svg>
-        </div>
-    </div>
-
-
-
-
-      
-      
-      
     <aside class="sidebar">
         <div class="sidebar-header">
-            <img src="images/jira.svg" alt="logo" />
+            <!-- <img src="images/jira.svg" alt="logo" /> -->
+            <div class="jira-logo">
+                <!-- bottom jira part-->
+                <svg id="svg-jira-logo-bottom-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1162">
+                    <path fill="url(#a)" d="M1075.81.678H.903c0 267.986 217.254 485.231 485.232 485.231h198.631v191.174C684.941 944.58 901.565 1161.49 1169.07 1162V93.935c0-51.503-41.75-93.257-93.26-93.257Z"/>
+                    <defs>
+                    <linearGradient id="a" x1="300246" x2="166109" y1="1511.68" y2="149319" gradientUnits="userSpaceOnUse">
+                        <stop offset=".18" stop-color="#0052CC"/>
+                        <stop offset="1" stop-color="#2684FF"/>
+                    </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- middle jira part-->
+                <svg id="svg-jira-logo-middle-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1169 1162">
+                    <path fill="url(#a)" d="M1074.98.395H.082C.248 268.137 217.248 485.146 485 485.32h198.01v191.796c.341 267.741 217.489 484.604 485.23 484.604V93.661c0-51.503-41.75-93.266-93.26-93.266Z"/>
+                    <defs>
+                    <linearGradient id="a" x1="292386" x2="176425" y1="535.062" y2="136052" gradientUnits="userSpaceOnUse">
+                        <stop offset=".18" stop-color="#0052CC"/>
+                        <stop offset="1" stop-color="#2684FF"/>
+                    </linearGradient>
+                    </defs>
+                </svg>
+       
+               <!-- upper jira part-->
+                <svg id="svg-jira-logo-upper-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1163">
+                    <path fill="#2684FF" d="M1075.85.807H.938a485.232 485.232 0 0 0 485.231 485.231H684.18v191.183c.175 267.742 217.175 484.749 484.92 484.929V94.055c0-51.485-41.74-93.248-93.25-93.248Z"/>
+                </svg>
+            </div>
             <h2>Simple JIRA</h2>
         </div>
 
@@ -113,9 +98,8 @@
     
     <div id="sprint">
         Backlog 9 issues
-
     </div>
-    <script src="anime.min.js"></script>
+
     <script src="script.js"></script>
 </body>
 </html>

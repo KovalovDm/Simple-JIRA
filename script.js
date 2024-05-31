@@ -1,35 +1,53 @@
 // animations
-const hello = document.querySelector('#hello');
+const jiraLogoBox = document.querySelector('.jira-logo');
+const upperSvgElement = document.querySelector('#svg-jira-logo-upper-element');
+const middleSvgElement = document.querySelector('#svg-jira-logo-middle-element');
+const bottomSvgElement = document.querySelector('#svg-jira-logo-bottom-element');
 
-let upperSvgElement = document.querySelector('#svg-jira-logo-upper-element');
-let middleSvgElement = document.querySelector('#svg-jira-logo-middle-element');
-let bottomSvgElement = document.querySelector('#svg-jira-logo-bottom-element');
+upperSvgElement.style.transition = 'transform 0.3s ease-in-out';
+middleSvgElement.style.transition = 'transform 0.3s ease-in-out';
+bottomSvgElement.style.transition = 'transform 0.3s ease-in-out';
 
-// // Устанавливаем начальное состояние анимации для каждого SVG элемента
-upperSvgElement.style.transition = 'transform 0.5s ease-in-out';
-middleSvgElement.style.transition = 'transform 0.5s ease-in-out';
-bottomSvgElement.style.transition = 'transform 0.5s ease-in-out';
-// // bottomSvgElement.style.transform = 'translate(0px, 0px)';
+let jiraLogoScale = 1;
+let jiraLogoTranslateX = 0;
+let jiraLogoTranslateY = 0;
+let jiraLogoScalingUp = false;
+let jiraLogoScalingDown = false;
 
-hello.addEventListener('mouseover', () => {
-    upperSvgElement.style.transform = 'scale(1.1)';
-    middleSvgElement.style.transform = 'translate(-50%, -50%) scale(1.1)';
-    bottomSvgElement.style.transform = 'scale(1.1)';
+function animateJiraLogo() {
+    if (jiraLogoScalingUp && jiraLogoScale < 1.2) {
+        jiraLogoScale += 0.02;
+        jiraLogoTranslateX += 0.6;
+        jiraLogoTranslateY += 0.6;
+    } else if (jiraLogoScalingDown && jiraLogoScale > 1) {
+        jiraLogoScale -= 0.02;
+        jiraLogoTranslateX -= 0.6;
+        jiraLogoTranslateY -= 0.6;
+    }
 
-    setTimeout(() => {
-        upperSvgElement.style.transform = 'scale(1)';
-        middleSvgElement.style.transform = 'translate(-50%, -50%) scale(1)';
-        bottomSvgElement.style.transform = 'scale(1)';
-    }, 500);
+    upperSvgElement.style.transform = `translate(${jiraLogoTranslateX}px, -${jiraLogoTranslateY}px) scale(${jiraLogoScale})`;
+    middleSvgElement.style.transform = `translate(-50%, -50%) scale(${jiraLogoScale})`;
+    bottomSvgElement.style.transform = `translate(-${jiraLogoTranslateX}px, ${jiraLogoTranslateY}px) scale(${jiraLogoScale})`;
 
-    // Если элемент находится в начальном положении, двигаем его вниз и влево
-    //bottomSvgElement.style.transform = 'translate(-50px, 50px)';
+    if ((jiraLogoScalingUp && jiraLogoScale < 1.2) || (jiraLogoScalingDown && jiraLogoScale > 1)) {
+        requestAnimationFrame(animateJiraLogo);
+    } else if (jiraLogoScalingUp && jiraLogoScale >= 1.2) {
+        jiraLogoScalingUp = false;
+        setTimeout(() => {
+            jiraLogoScalingDown = true;
+            animateJiraLogo();
+        }, 200); // delay before starting the return animation
+    } else if (jiraLogoScalingDown && jiraLogoScale <= 1) {
+        jiraLogoScalingDown = false; // reset the flag after the return animation
+    }
+}
+
+jiraLogoBox.addEventListener('mouseover', () => {
+    if (!jiraLogoScalingUp && !jiraLogoScalingDown) {
+        jiraLogoScalingUp = true;
+        animateJiraLogo();
+    }
 });
-
-// bottomSvgElement.addEventListener('transitionend', () => {
-//     // Когда анимация смещения завершена, возвращаем элемент обратно
-//     //bottomSvgElement.style.transform = 'translate(-20%, 20px)';
-// });
 
 
 
