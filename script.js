@@ -65,6 +65,7 @@ window.onload = function() {
     listOfProjectsContainer.style.left = sidebarWidth + 'px';
 };
 
+
 // show the list of projects when hovering over the "All projects" button
 let timeoutId;
 
@@ -160,13 +161,29 @@ document.addEventListener('click', function(event) {
 //     }
 // }
 
+// // indexDB
+// let db;
+// let dbReq = indexedDB.open('projectDatabase', 1);
+// dbReq.onupgradeneeded = function(event) {
+//     db = event.target.result;
+//     let users = db.createObjectStore('users', {keyPath: 'email'});
+// }
+
+// dbReq.onsuccess = function(event) {
+//     db = event.target.result;
+//     console.log('success opening database');
+// }
+// dbReq.onerror = function(event) {
+//     console.log('error opening database ' + event.target.errorCode);
+// }
+
+
 // ----------------------------
 
 class User {
-    constructor(fullName, email, avatar) {
+    constructor(fullName, email) {
         this.fullName = fullName;
         this.email = email;
-        this.avatar = avatar
     }
 }
 
@@ -198,22 +215,6 @@ let currentProject = null;
 
 let sprints = [];
 let tasks = [];
-
-// // indexDB
-// let db;
-// let dbReq = indexedDB.open('projectDatabase', 1);
-// dbReq.onupgradeneeded = function(event) {
-//     db = event.target.result;
-//     let users = db.createObjectStore('users', {keyPath: 'email'});
-// }
-
-// dbReq.onsuccess = function(event) {
-//     db = event.target.result;
-//     console.log('success opening database');
-// }
-// dbReq.onerror = function(event) {
-//     console.log('error opening database ' + event.target.errorCode);
-// }
 
 
 function renderProjects() {
@@ -251,6 +252,32 @@ function updateProjectName() {
 
     projectNameElement.textContent = currentProject.name;
 }
+
+
+// Получаем все кнопки с классом "hide-sprint-main-info-button"
+var buttons = document.querySelectorAll('.hide-sprint-main-info-button');
+
+// Добавляем обработчик событий для каждой кнопки
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Находим ближайший родительский элемент с классом "sprint"
+        var sprint = this.closest('.sprint');
+        // Находим элемент "sprint-content" внутри этого родительского элемента
+        var sprintContent = sprint.querySelector('.sprint-content');
+
+        // Переключаем видимость элемента "sprint-content"
+        if (sprintContent.style.display === 'none') {
+            sprintContent.style.display = 'block';
+        } else {
+            sprintContent.style.display = 'none';
+        }
+    });
+});
+
+
+
+
+
 
 function initData() {
     // create users

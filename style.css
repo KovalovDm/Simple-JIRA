@@ -308,6 +308,157 @@ main {
 
 
 
+.sprint {
+  display: flex;
+  flex-direction: column;
+  background-color: #4f52ba;
+  border-radius: 5px;
+  margin: 20px;
+
+  /* DEBUG */
+}
+
+.sprint-header {
+  display: flex;
+  position: sticky;
+  top: 20px;
+  z-index: 1;
+  flex-direction: column;
+
+  /* DEBUG */
+  background-color: pink;
+  border-radius: 3px;
+}
+
+.sprint-main-info {
+  display: flex;
+
+  /* DEBUG */
+  background-color: red;
+  border-radius: 15px;
+}
+
+
+
+
+.sprint-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+
+  /* DEBUG */
+  background-color: rgb(11, 203, 217);
+  border-radius: 15px;
+}
+
+.hide-sprint-main-info-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #c7a021;
+  cursor: pointer;
+}
+
+.sprint-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #42c721;
+}
+
+.sprint-issues-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #c72121;
+}
+
+.sprint-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #8291d7;
+
+}
+
+
+.sptint-container-with-tasks-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 6px;
+
+  /* DEBUG */
+  background-color: rgb(48, 203, 25);
+  width: 150px;
+
+}
+
+.not-started-tasks {
+  display: flex;
+  background-color: grey;
+  border-radius: 5px;
+  justify-content: center;
+
+  /* DEBUG */
+  width: 30px;
+}
+
+.in-progress-tasks {
+  display: flex;
+  background-color: rgb(8, 12, 226);
+  border-radius: 5px;
+  justify-content: center;
+
+  /* DEBUG */
+  width: 30px;
+}
+
+.done-tasks {
+  display: flex;
+  background-color: green;
+  border-radius: 5px;
+  justify-content: center;
+
+  /* DEBUG */
+  width: 30px;
+}
+
+.sprint-participants {
+  display: flex;
+
+  /* DEBUG */
+  background-color: yellow;
+  border-radius: 15px;
+}
+
+.sprint-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+  /* DEBUG */
+  background-color: rgb(81, 203, 181);
+  border-radius: 15px;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* ---------------------------------------------- */
@@ -338,21 +489,6 @@ main {
   background-color: green;
   visibility: visible;
 }
-
-
-
-
-
-
-
-/*
-
-#sprint {
-    background-color: #4f52ba;
-    border-radius: 5px;
-    width: 50%;
-    right: inherit;
-} */
 
 
 /* ------------------------ PREVIOUS sidebar ------------------*/
