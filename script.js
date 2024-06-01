@@ -1,4 +1,6 @@
 // animations
+
+// jira logo animation
 const jiraLogoBox = document.querySelector('.jira-logo');
 const upperSvgElement = document.querySelector('#svg-jira-logo-upper-element');
 const middleSvgElement = document.querySelector('#svg-jira-logo-middle-element');
@@ -51,99 +53,17 @@ jiraLogoBox.addEventListener('mouseover', () => {
 
 
 
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     // Получаем элементы
-//     const modal = document.getElementById("myModal");
-//     const btn = document.getElementById("createProject");
-//     const span = document.getElementsByClassName("close")[0];
+// design
 
-//     // Открываем модальное окно при нажатии на кнопку
-//     btn.onclick = function() {
-//         modal.style.display = "block";
-//     }
+// position the list of projects container to the right of the sidebar
+window.onload = function() {
+    var sidebarContainer = document.querySelector('.sidebar-container');
+    var listOfProjectsContainer = document.querySelector('.list-of-projects-container');
+  
+    var sidebarWidth = sidebarContainer.offsetWidth;
+    listOfProjectsContainer.style.left = sidebarWidth + 'px';
+};
 
-//     // Закрываем модальное окно при нажатии на крестик
-//     span.onclick = function() {
-//         modal.style.display = "none";
-//     }
-
-//     // Закрываем модальное окно при нажатии вне его
-//     window.onclick = function(event) {
-//         if (event.target == modal) {
-//             modal.style.display = "none";
-//         }
-//     }
-
-//     // Обработка формы
-//     const form = document.getElementById("modalForm");
-//     form.addEventListener('submit', function(event) {
-//         event.preventDefault();
-//         // Получение значений формы
-//         const name = document.getElementById("name").value;
-//         const email = document.getElementById("email").value;
-//         console.log(`Имя: ${name}, Email: ${email}`);
-//         // Закрываем модальное окно после отправки данных
-//         modal.style.display = "none";
-//     });
-// });
-
-
-
-// let modal = document.getElementById("myModal");
-// let btn = document.getElementById("createProject");
-// let span = document.getElementsByClassName("close")[0];
-// let create = document.getElementById("create");
-// let cancel = document.getElementById("cancel");
-
-// btn.onclick = function() {
-//   modal.style.display = "block";
-//   console.log("button wa clicked");
-// }
-
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// create.onclick = function() {
-//   let projectName = document.getElementById("projectName").value;
-//   let project = new Project(projectName);
-//   console.log(project.name);
-//   modal.style.display = "none";
-// }
-
-// cancel.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-
-// document.getElementById('createProject').addEventListener('click', function() {
-//     let project = new Project("Project Name");
-//     projects.push(project);
-//     currentProject = project;
-
-//     // let newProjectDiv = document.createElement('div');
-//     // newProjectDiv.textContent = "Новый проект создан: " + project.name + " " + project.status + " " + project.startDate;
-//     // document.body.appendChild(newProjectDiv);
-
-//     // let projectListItem = document.createElement('li');
-//     // projectListItem.textContent = project.name;
-//     // document.getElementById('sidebar').appendChild(projectListItem);
-
-//     // projectListItem.addEventListener('click', function() {
-//     //     document.getElementById('mainContent').textContent = "Проект: " + project.name + ", Статус: " + project.status + ", Дата начала: " + project.startDate;
-//     // });
-// });
-
-
-
-
-
-// let currentUser = new User("Dm Kov", "abc@gmail.com");
 
 // class Task {
 //     constructor(title, description, status) {
@@ -153,18 +73,18 @@ jiraLogoBox.addEventListener('mouseover', () => {
 //     }
 // }
 
-class Sprint {
-    constructor(name, startDate, endDate) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.tasks = [];
-    }
+// class Sprint {
+//     constructor(name, startDate, endDate) {
+//         this.name = name;
+//         this.startDate = startDate;
+//         this.endDate = endDate;
+//         this.tasks = [];
+//     }
 
-    addTask(task) {
-        this.tasks.push(task);
-    }
-}
+//     addTask(task) {
+//         this.tasks.push(task);
+//     }
+// }
 
 
 
@@ -206,6 +126,7 @@ class Sprint {
 // }
 
 // ----------------------------
+
 class User {
     constructor(fullName, email) {
         this.fullName = fullName;
@@ -216,6 +137,14 @@ class User {
 class Project {
     constructor(name) {
         this.name = name;
+        this.sptints = []
+    }
+}
+
+class Sprint {
+    constructor(name) {
+        this.name = name;
+        this.tasks = [];
     }
 }
 
@@ -226,32 +155,51 @@ class Task {
 }
 
 let users = [];
+let currentUser = null;
+
 let projects = [];
+let currentProject = null;
+
+let sprints = [];
 let tasks = [];
 
 
-let bodyElement = document.querySelector('body');
-let projectsElement = document.querySelector('#all-projects');
-
-let popupAllProjectsElement = document.createElement('div');
-popupAllProjectsElement.classList.add('popupProjectsList');
-
-projectsElement.addEventListener('mouseover', () => {
-    popupAllProjectsElement.innerHTML = '';
+function renderProjects() {
+    let listOfProjects = document.querySelector('.list-of-projects');
+  
+    listOfProjects.innerHTML = '';
+  
+    projects.sort((a, b) => a.name.localeCompare(b.name));
+  
     projects.forEach(project => {
-        let projectElement = document.createElement('p');
-        projectElement.textContent = project.name; // замените на свойство, содержащее имя проекта
-        popupAllProjectsElement.appendChild(projectElement);
+      let projectDiv = document.createElement('div');
+      projectDiv.className = 'project';
+      projectDiv.textContent = project.name;
+  
+      if (project === currentProject) {
+        projectDiv.classList.add('current');
+      }
+  
+      projectDiv.addEventListener('click', () => {
+        switchToProject(project);
+      });
+  
+      listOfProjects.append(projectDiv);
     });
-    bodyElement.appendChild(popupAllProjectsElement);
-});
+}
+  
+function switchToProject(project) {
+    currentProject = project;
+    renderProjects(); // Обновить список проектов
+    updateProjectName(); // Обновить имя проекта
+}
 
-projectsElement.addEventListener('mouseout', () => {
-    bodyElement.removeChild(popupAllProjectsElement);
-});
+function updateProjectName() {
+    let projectNameElement = document.querySelector('.project-name');
 
+    projectNameElement.textContent = currentProject.name;
+}
 
-// initialization for project to be non-empty
 function initData() {
     // create users
     users.push(new User("John Smith", "john.smith@example.com"));
@@ -272,29 +220,40 @@ function initData() {
     projects.push(new Project("Nebula Quest"));
     projects.push(new Project("Pioneer Endeavor"));
 
+    // projects.push(new Project("Apollo Initiative"));
+    // projects.push(new Project("Orion Venture"));
+    // projects.push(new Project("Zenith Horizon"));
+    // projects.push(new Project("Nebula Quest"));
+    // projects.push(new Project("Pioneer Endeavor"));
+    // projects.push(new Project("Apollo Initiative"));
+    // projects.push(new Project("Orion Venture"));
+    // projects.push(new Project("Zenith Horizon"));
+    // projects.push(new Project("Nebula Quest"));
+    // projects.push(new Project("Pioneer Endeavor"));
+    // projects.push(new Project("Apollo Initiative"));
+    // projects.push(new Project("Orion Venture"));
+    // projects.push(new Project("Zenith Horizon"));++
+    // projects.push(new Project("Nebula Quest"));
+    // projects.push(new Project("Pioneer Endeavor"));
+    // projects.push(new Project("Apollo Initiative"));
+    // projects.push(new Project("Orion Venture"));
+    // projects.push(new Project("Zenith Horizon"));
+    // projects.push(new Project("Nebula Quest"));
+    // projects.push(new Project("Pioneer Endeavor"));
+
     // create sprints
+
     // create tasks
 
-    // let user = new User("Dm Kov", "abc@gmail.com");
 
-    // // Создание объекта Task
-    // let task = new Task("Task Title", "Task Description", "Task Status");
-
-    // // Создание объекта Sprint
-    // let sprint = new Sprint("Sprint Name", "2022-01-01", "2022-01-31");
-
-    // // Возвращение всех созданных объектов в виде объекта
-    // return {
-    //     user: user,
-    //     task: task,
-    //     sprint: sprint
-    // };
+    currentUser = users[0];
+    currentProject = projects[0];
 }
 
 initData();
+switchToProject(currentProject);
 
 // DEBUG
 console.log("test");
 console.log(users);
 console.log(projects);
-

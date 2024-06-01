@@ -5,99 +5,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jira</title>
-    <!-- Linking Google Font Link For Icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <!-- <img src="images/jira.svg" alt="logo" /> -->
-            <div class="jira-logo">
-                <!-- bottom jira part-->
-                <svg id="svg-jira-logo-bottom-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1162">
-                    <path fill="url(#a)" d="M1075.81.678H.903c0 267.986 217.254 485.231 485.232 485.231h198.631v191.174C684.941 944.58 901.565 1161.49 1169.07 1162V93.935c0-51.503-41.75-93.257-93.26-93.257Z"/>
-                    <defs>
-                    <linearGradient id="a" x1="300246" x2="166109" y1="1511.68" y2="149319" gradientUnits="userSpaceOnUse">
-                        <stop offset=".18" stop-color="#0052CC"/>
-                        <stop offset="1" stop-color="#2684FF"/>
-                    </linearGradient>
-                    </defs>
-                </svg>
-
-                <!-- middle jira part-->
-                <svg id="svg-jira-logo-middle-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1169 1162">
-                    <path fill="url(#a)" d="M1074.98.395H.082C.248 268.137 217.248 485.146 485 485.32h198.01v191.796c.341 267.741 217.489 484.604 485.23 484.604V93.661c0-51.503-41.75-93.266-93.26-93.266Z"/>
-                    <defs>
-                    <linearGradient id="a" x1="292386" x2="176425" y1="535.062" y2="136052" gradientUnits="userSpaceOnUse">
-                        <stop offset=".18" stop-color="#0052CC"/>
-                        <stop offset="1" stop-color="#2684FF"/>
-                    </linearGradient>
-                    </defs>
-                </svg>
-       
-               <!-- upper jira part-->
-                <svg id="svg-jira-logo-upper-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1163">
-                    <path fill="#2684FF" d="M1075.85.807H.938a485.232 485.232 0 0 0 485.231 485.231H684.18v191.183c.175 267.742 217.175 484.749 484.92 484.929V94.055c0-51.485-41.74-93.248-93.25-93.248Z"/>
-                </svg>
-            </div>
-            <h2>Simple JIRA</h2>
+    <div id="page">
+        <div class="sidebar-container">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <!-- <img src="images/jira.svg" alt="logo" /> -->
+                    <div class="jira-logo">
+                        <!-- bottom jira part-->
+                        <svg id="svg-jira-logo-bottom-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1162">
+                            <path fill="url(#a)" d="M1075.81.678H.903c0 267.986 217.254 485.231 485.232 485.231h198.631v191.174C684.941 944.58 901.565 1161.49 1169.07 1162V93.935c0-51.503-41.75-93.257-93.26-93.257Z"/>
+                            <defs>
+                            <linearGradient id="a" x1="300246" x2="166109" y1="1511.68" y2="149319" gradientUnits="userSpaceOnUse">
+                                <stop offset=".18" stop-color="#0052CC"/>
+                                <stop offset="1" stop-color="#2684FF"/>
+                            </linearGradient>
+                            </defs>
+                        </svg>
+    
+                        <!-- middle jira part-->
+                        <svg id="svg-jira-logo-middle-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1169 1162">
+                            <path fill="url(#a)" d="M1074.98.395H.082C.248 268.137 217.248 485.146 485 485.32h198.01v191.796c.341 267.741 217.489 484.604 485.23 484.604V93.661c0-51.503-41.75-93.266-93.26-93.266Z"/>
+                            <defs>
+                            <linearGradient id="a" x1="292386" x2="176425" y1="535.062" y2="136052" gradientUnits="userSpaceOnUse">
+                                <stop offset=".18" stop-color="#0052CC"/>
+                                <stop offset="1" stop-color="#2684FF"/>
+                            </linearGradient>
+                            </defs>
+                        </svg>
+            
+                    <!-- upper jira part-->
+                        <svg id="svg-jira-logo-upper-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1163">
+                            <path fill="#2684FF" d="M1075.85.807H.938a485.232 485.232 0 0 0 485.231 485.231H684.18v191.183c.175 267.742 217.175 484.749 484.92 484.929V94.055c0-51.485-41.74-93.248-93.25-93.248Z"/>
+                        </svg>
+                    </div>
+                    <h2>Simple JIRA</h2>
+                </div>
+    
+                <ul class="sidebar-links">
+                    <h4>
+                        <span>Main Menu</span>
+                        <div class="menu-separator"></div>
+                    </h4>
+                    <li id="all-projects">
+                        <a href="#">
+                            <span><img src="images/puzzle-white.svg" alt="projects" width="24px"></span>
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span><img src="images/puzzle-white.svg" alt="backlog" width="24px"></span>
+                            Backlog
+                        </a>
+                    </li>
+    
+                    <h4>
+                        <span>General</span>
+                        <div class="menu-separator"></div>
+                    </h4>
+                    <li>
+                        <a href="#">
+                            <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                            Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span><img src="images/puzzle-white.svg" alt="manage-users" width="24px"></span>
+                            Manage users
+                        </a>
+                    </li>
+                </ul>
+    
+                <div class="user-account">
+                    <div class="user-profile">
+                        <img src="images/logo.png" alt="Profile Image"/>
+                        <div class="user-detail">
+                            <h3>Eva Murphy</h3>
+                            <span>Web Developer</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
 
-        <ul class="sidebar-links">
-            <h4>
-                <span>Main Menu</span>
-                <div class="menu-separator"></div>
-            </h4>
-            <li id="all-projects">
-                <a href="#">
-                    <span><img src="images/puzzle-white.svg" alt="projects" width="24px"></span>
-                    Projects
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="images/puzzle-white.svg" alt="backlog" width="24px"></span>
-                    Backlog
-                </a>
-            </li>
-
-            <h4>
-            <span>General</span>
-            <div class="menu-separator"></div>
-            </h4>
-            <li>
-                <a href="#">
-                    <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
-                    Map
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="images/puzzle-white.svg" alt="manage-users" width="24px"></span>
-                    Manage users
-                </a>
-            </li>
-        </ul>
-
-        <div class="user-account">
-            <div class="user-profile">
-                <img src="images/logo.png" alt="Profile Image"/>
-                <div class="user-detail">
-                    <h3>Eva Murphy</h3>
-                    <span>Web Developer</span>
+        <main>
+            <div class="main-header">
+                <div class="project-name">
                 </div>
             </div>
-        </div>
-    </aside>
 
-    
-    <div id="sprint">
-        Backlog 9 issues
+            <div class="main-content">
+                <div class="sprint-list">
+                    <div class="sprint">
+                        Sprint 1, 9 issues
+                    </div>
+                    <div class="sprint">
+                        Sprint 1, 9 issues
+                    </div>
+                    <div class="sprint">
+                        Sprint 1, 9 issues
+                    </div>
+                    <div class="sprint">
+                        Sprint 1, 9 issues
+                    </div>
+                </div>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                </p>
+            </div>
+        </main>
+        
+        
+    </div>
+
+
+    <div class="list-of-projects-container">
+        <div class="list-of-projects-header">
+            <h3>ALL PROJECTS </h3>
+        </div>
+        <div class="list-of-projects">
+        </div>
+        <div class="add-new-project-container">
+            <button class="add-new-project">Add new project</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
