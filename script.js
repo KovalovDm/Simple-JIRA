@@ -1,4 +1,4 @@
-// animations
+import * as animations from './animations.js';
 
 // jira logo animation
 const jiraLogoBox = document.querySelector('.jira-logo');
@@ -15,6 +15,7 @@ let jiraLogoTranslateX = 0;
 let jiraLogoTranslateY = 0;
 let jiraLogoScalingUp = false;
 let jiraLogoScalingDown = false;
+
 
 function animateJiraLogo() {
     if (jiraLogoScalingUp && jiraLogoScale < 1.2) {
@@ -63,6 +64,40 @@ window.onload = function() {
     var sidebarWidth = sidebarContainer.offsetWidth;
     listOfProjectsContainer.style.left = sidebarWidth + 'px';
 };
+
+// show the list of projects when hovering over the "All projects" button
+let timeoutId;
+
+document.getElementById('all-projects').addEventListener('mouseover', function() {
+    clearTimeout(timeoutId);
+    document.querySelector('.list-of-projects-container').classList.add('visible');
+});
+
+document.getElementById('all-projects').addEventListener('mouseout', function() {
+    timeoutId = setTimeout(function() {
+        document.querySelector('.list-of-projects-container').classList.remove('visible');
+    }, 1000);
+});
+
+document.querySelector('.list-of-projects-container').addEventListener('mouseover', function() {
+    clearTimeout(timeoutId);
+});
+
+document.querySelector('.list-of-projects-container').addEventListener('mouseout', function() {
+    timeoutId = setTimeout(function() {
+        document.querySelector('.list-of-projects-container').classList.remove('visible');
+    }, 1000);
+});
+
+// Скрывает .list-of-projects-container при клике вне его
+document.addEventListener('click', function(event) {
+    var isClickInside = document.querySelector('.list-of-projects-container').contains(event.target);
+    var isClickOnAllProjects = document.getElementById('all-projects') === event.target;
+
+    if (!isClickInside && !isClickOnAllProjects) {
+        document.querySelector('.list-of-projects-container').classList.remove('visible');
+    }
+});
 
 
 // class Task {
@@ -128,9 +163,10 @@ window.onload = function() {
 // ----------------------------
 
 class User {
-    constructor(fullName, email) {
+    constructor(fullName, email, avatar) {
         this.fullName = fullName;
         this.email = email;
+        this.avatar = avatar
     }
 }
 
@@ -162,6 +198,22 @@ let currentProject = null;
 
 let sprints = [];
 let tasks = [];
+
+// // indexDB
+// let db;
+// let dbReq = indexedDB.open('projectDatabase', 1);
+// dbReq.onupgradeneeded = function(event) {
+//     db = event.target.result;
+//     let users = db.createObjectStore('users', {keyPath: 'email'});
+// }
+
+// dbReq.onsuccess = function(event) {
+//     db = event.target.result;
+//     console.log('success opening database');
+// }
+// dbReq.onerror = function(event) {
+//     console.log('error opening database ' + event.target.errorCode);
+// }
 
 
 function renderProjects() {
@@ -219,27 +271,6 @@ function initData() {
     projects.push(new Project("Zenith Horizon"));
     projects.push(new Project("Nebula Quest"));
     projects.push(new Project("Pioneer Endeavor"));
-
-    // projects.push(new Project("Apollo Initiative"));
-    // projects.push(new Project("Orion Venture"));
-    // projects.push(new Project("Zenith Horizon"));
-    // projects.push(new Project("Nebula Quest"));
-    // projects.push(new Project("Pioneer Endeavor"));
-    // projects.push(new Project("Apollo Initiative"));
-    // projects.push(new Project("Orion Venture"));
-    // projects.push(new Project("Zenith Horizon"));
-    // projects.push(new Project("Nebula Quest"));
-    // projects.push(new Project("Pioneer Endeavor"));
-    // projects.push(new Project("Apollo Initiative"));
-    // projects.push(new Project("Orion Venture"));
-    // projects.push(new Project("Zenith Horizon"));++
-    // projects.push(new Project("Nebula Quest"));
-    // projects.push(new Project("Pioneer Endeavor"));
-    // projects.push(new Project("Apollo Initiative"));
-    // projects.push(new Project("Orion Venture"));
-    // projects.push(new Project("Zenith Horizon"));
-    // projects.push(new Project("Nebula Quest"));
-    // projects.push(new Project("Pioneer Endeavor"));
 
     // create sprints
 

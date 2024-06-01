@@ -147,7 +147,7 @@ main {
   height: 1px;
   /* transform: scaleX(1);
   transform: translateY(-50%); */
-  background: #4f52ba;
+  /* background: #4f52ba; */
   /* transform-origin: right;
   transition-delay: 0.2s; */
 }
@@ -203,11 +203,13 @@ main {
 .user-profile h3 {
   font-size: 1rem;
   font-weight: 600;
+  color: #fff;
 }
 
 .user-profile span {
   font-size: 0.775rem;
   font-weight: 600;
+  color: #fff;
 }
 
 .user-detail {
@@ -220,21 +222,38 @@ main {
   border-radius: 4px;
 }
 
-
+.user-account:hover .user-detail h3,
+.user-account:hover .user-detail span {
+    color: #161a2d;
+}
 
 
 .list-of-projects-container {
   display: flex;
+  /* display: none; */
+  position: fixed;
   flex-direction: column;
   align-items: center;
   width: 240px;
-  position: fixed;
   top: 90px;
-  bottom: 0;
-  height: calc(100vh - 90px);
+  max-height: calc(100vh - 90px);
+
+
+  opacity: 0;
+  transition: opacity 0.18s ease-in-out;
+  pointer-events: none;
+  
+
   /* DEBUG */
   background-color: red;
 }
+
+
+.list-of-projects-container.visible {
+  opacity: 1;
+  pointer-events: auto; /* Восстанавливает взаимодействие с элементом */
+}
+
 
 .list-of-projects-header {
   display: flex;
@@ -242,6 +261,7 @@ main {
   align-items: center;
   width: 100%;
   height: 40px;
+  
   /* DEBUG */
   background-color: orange;
 }
@@ -263,14 +283,8 @@ main {
 
   /* DEBUG */
   background: pink;
+  border-radius: 14px;
 }
-
-
-
-
-
-
-
 
 .project {
   display: flex;
