@@ -254,28 +254,33 @@ function updateProjectName() {
 }
 
 
-// Получаем все кнопки с классом "hide-sprint-main-info-button"
-var buttons = document.querySelectorAll('.hide-sprint-main-info-button');
-
-// Добавляем обработчик событий для каждой кнопки
-buttons.forEach(function(button) {
-    button.addEventListener('click', function() {
-        // Находим ближайший родительский элемент с классом "sprint"
-        var sprint = this.closest('.sprint');
-        // Находим элемент "sprint-content" внутри этого родительского элемента
-        var sprintContent = sprint.querySelector('.sprint-content');
-
-        // Переключаем видимость элемента "sprint-content"
-        if (sprintContent.style.display === 'none') {
-            sprintContent.style.display = 'block';
-        } else {
-            sprintContent.style.display = 'none';
-        }
-    });
+document.querySelectorAll('.sprint-content').forEach(sprintContent => {
+    sprintContent.dataset.height = sprintContent.scrollHeight; // сохраняем исходную высоту
+    sprintContent.style.height = sprintContent.scrollHeight + 'px';
 });
 
+document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
+    let isExpanded = true;
+    let svg = button.querySelector('.expand-sprint-content-button-svg'); // Находим SVG
+    const sprintContent = button.closest('.sprint').querySelector('.sprint-content');
+    // Сохраняем начальную высоту в data-height
+    sprintContent.dataset.height = sprintContent.scrollHeight;
 
-
+    button.addEventListener('click', function() {
+        svg.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
+        svg.style.transition = 'transform 0.4s';
+        if (isExpanded) {
+            requestAnimationFrame(() => {
+                sprintContent.style.height = '0';
+            });
+        } else {
+            requestAnimationFrame(() => {
+                sprintContent.style.height = sprintContent.dataset.height + 'px';
+            });
+        }
+        isExpanded = !isExpanded;
+    });
+});
 
 
 

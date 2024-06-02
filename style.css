@@ -251,6 +251,7 @@ main {
 
 .list-of-projects-container.visible {
   opacity: 1;
+  z-index: 2;
   pointer-events: auto; /* Восстанавливает взаимодействие с элементом */
 }
 
@@ -321,9 +322,10 @@ main {
 .sprint-header {
   display: flex;
   position: sticky;
-  top: 20px;
+  top: 0px;
   z-index: 1;
   flex-direction: column;
+  padding: 20px;
 
   /* DEBUG */
   background-color: pink;
@@ -358,13 +360,21 @@ main {
   align-items: center;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 20%;
   background-color: #c7a021;
   cursor: pointer;
 }
 
+.hide-sprint-main-info-button svg {
+  width: 20px;
+  height: 20px;
+
+}
+
 .sprint-name {
   display: flex;
+  font-weight: bold;
+  font-weight: 500;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
@@ -444,12 +454,23 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: auto;
 
+  overflow: hidden;
+  /* transform-origin: top; */
+  /* max-height: 2000px; 
+  transition: max-height 2s ease-in-out; */
+  transition: height 0.4s ease-in-out;
 
   /* DEBUG */
   background-color: rgb(81, 203, 181);
   border-radius: 15px;
 }
+
+/* .rotated {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease-in-out;
+} */
 
 
 
