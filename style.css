@@ -325,7 +325,9 @@ main {
   top: 0px;
   z-index: 1;
   flex-direction: column;
-  padding: 20px;
+  padding-top: 6px;
+  padding-bottom: 9px;
+  /* margin-bottom: 5px; */
 
   /* DEBUG */
   background-color: pink;
@@ -363,12 +365,12 @@ main {
   border-radius: 20%;
   background-color: #c7a021;
   cursor: pointer;
+  margin: 0 10px;
 }
 
 .hide-sprint-main-info-button svg {
   width: 20px;
   height: 20px;
-
 }
 
 .sprint-name {
@@ -379,6 +381,16 @@ main {
   align-items: center;
   border-radius: 15px;
   background-color: #42c721;
+  margin: 0 10px;
+}
+
+.sprint-dates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #c72121;
+  margin: 0 10px;
 }
 
 .sprint-issues-amount {
@@ -387,6 +399,7 @@ main {
   align-items: center;
   border-radius: 15px;
   background-color: #c72121;
+  margin: 0 10px;
 }
 
 .sprint-label {
@@ -395,11 +408,11 @@ main {
   align-items: center;
   border-radius: 15px;
   background-color: #8291d7;
-
+  margin: 0 10px;
 }
 
 
-.sptint-container-with-tasks-status {
+.sprint-container-with-tasks-status {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -444,10 +457,18 @@ main {
 
 .sprint-participants {
   display: flex;
+  margin: 4px;
 
   /* DEBUG */
   background-color: yellow;
   border-radius: 15px;
+}
+
+.sprint-participants img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 5px;
 }
 
 .sprint-content {
@@ -457,20 +478,12 @@ main {
   height: auto;
 
   overflow: hidden;
-  /* transform-origin: top; */
-  /* max-height: 2000px; 
-  transition: max-height 2s ease-in-out; */
   transition: height 0.4s ease-in-out;
 
   /* DEBUG */
   background-color: rgb(81, 203, 181);
   border-radius: 15px;
 }
-
-/* .rotated {
-  transform: rotate(-90deg);
-  transition: transform 0.3s ease-in-out;
-} */
 
 
 

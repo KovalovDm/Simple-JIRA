@@ -1,4 +1,4 @@
-import * as animations from './animations.js';
+import graphics from './graphics.js';
 
 // jira logo animation
 const jiraLogoBox = document.querySelector('.jira-logo');
@@ -190,20 +190,42 @@ class User {
 class Project {
     constructor(name) {
         this.name = name;
-        this.sptints = []
+        this.sprints = []
+        this.backlog;
+    }
+
+    addSprint() {
+        const orderNumInProject = this.sprints.length > 0 ? this.sprints[this.sprints.length - 1].orderNumInProject + 1 : 1;
+        let startDate;
+        let endDate = new Date();
+
+        if (this.sprints.length === 0) {
+            startDate = new Date();
+        } else {
+            startDate = new Date(this.sprints[this.sprints.length - 1].endDate);
+        }
+
+        endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 14);
+
+        this.sprints.push(new Sprint(orderNumInProject, startDate, endDate));
     }
 }
 
 class Sprint {
-    constructor(name) {
-        this.name = name;
+    constructor(orderNumInProject, startDate, endDate, status = 'FUTURE') {
+        this.orderNumInProject = orderNumInProject;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
         this.tasks = [];
     }
 }
 
 class Task {
-    constructor(title) {
+    constructor(title, status) {
         this.title = title;
+        this.status = status;
     }
 }
 
@@ -214,6 +236,7 @@ let projects = [];
 let currentProject = null;
 
 let sprints = [];
+
 let tasks = [];
 
 
@@ -240,11 +263,109 @@ function renderProjects() {
       listOfProjects.append(projectDiv);
     });
 }
+
+function renderSprints(project) {
+    const sprintList = document.querySelector('.sprint-list');
+    sprintList.innerHTML = ''; // clear the sprint list
+
+    project.sprints.forEach(sprint => {
+        // create sprint
+        const sprintElement = document.createElement('div');
+        sprintElement.className = 'sprint';
+
+        // create sprint header and append it to sprint
+        const sprintHeader = document.createElement('div');
+        sprintHeader.className = 'sprint-header';
+        sprintElement.appendChild(sprintHeader);
+
+        // create sprint main info and append it to sprintHeader
+        const sprintMainInfo = document.createElement('div');
+        sprintMainInfo.className = 'sprint-main-info';
+        sprintHeader.appendChild(sprintMainInfo);
+
+        // create sprint data and append it to sprintMainInfo
+        const sprintData = document.createElement('div');
+        sprintData.className = 'sprint-data';
+        sprintMainInfo.appendChild(sprintData);
+
+        // create hide sprint button and append it to sprintHeader
+        const hideSprintMainInfoButton = document.createElement('div');
+        hideSprintMainInfoButton.className = 'hide-sprint-main-info-button';
+        sprintData.appendChild(hideSprintMainInfoButton);
+
+        // add svg to hideSprintMainInfoButton
+        const expandSprintContentButtonSvg = graphics.createSvgElement();
+        hideSprintMainInfoButton.appendChild(expandSprintContentButtonSvg);
+        
+        // create sprint name and append it to sprintData
+        const sprintName = document.createElement('div');
+        sprintName.className = 'sprint-name';
+        sprintName.textContent = `${project.name} ${sprint.orderNumInProject}`;
+        sprintData.appendChild(sprintName);
+
+        // create sprint dates and append it to sprintData
+        const sprintDates = document.createElement('div');
+        sprintDates.className = 'sprint-dates';
+        sprintDates.textContent = `${('0' + sprint.startDate.getDate()).slice(-2)}.${('0' + (sprint.startDate.getMonth() + 1)).slice(-2)} - ${('0' + sprint.endDate.getDate()).slice(-2)}.${('0' + (sprint.endDate.getMonth() + 1)).slice(-2)}`;
+        sprintData.appendChild(sprintDates);
+
+        // create sprint issues amount and append it to sprintData
+        const sprintIssuesAmount = document.createElement('div');
+        sprintIssuesAmount.className = 'sprint-issues-amount';
+        sprintIssuesAmount.textContent = `${sprint.tasks.length} issues`;
+        sprintData.appendChild(sprintIssuesAmount);
+
+        // create sptint labels and append it to sprintData
+        const sprintLabel = document.createElement('div');
+        sprintLabel.className = 'sprint-label';
+        sprintLabel.textContent = `${sprint.status}`;
+        sprintData.appendChild(sprintLabel);
+
+        // create sprint container with issues status and append it to sprint main info
+        const sprintContainerWithTasksStatus = document.createElement('div');
+        sprintContainerWithTasksStatus.className = 'sprint-container-with-tasks-status';
+        sprintMainInfo.appendChild(sprintContainerWithTasksStatus);
+
+        // create not started tasks and append it to sprintContainerWithTasksStatus
+        const notStartedTasks = document.createElement('div');
+        notStartedTasks.className = 'not-started-tasks';
+        notStartedTasks.textContent = sprint.tasks.filter(task => task.status === 'not started').length;
+        sprintContainerWithTasksStatus.appendChild(notStartedTasks);
+
+        // create in progress tasks and append it to sprintContainerWithTasksStatus
+        const inProgressTasks = document.createElement('div');
+        inProgressTasks.className = 'in-progress-tasks';
+        inProgressTasks.textContent = sprint.tasks.filter(task => task.status === 'in progress').length;
+        sprintContainerWithTasksStatus.appendChild(inProgressTasks);
+
+        // create done tasks and append it to sprintContainerWithTasksStatus
+        const doneTasks = document.createElement('div');
+        doneTasks.className = 'done-tasks';
+        doneTasks.textContent = sprint.tasks.filter(task => task.status === 'done').length;
+        sprintContainerWithTasksStatus.appendChild(doneTasks);
+
+        // create sprint participants and append it to sprintHeader
+        const sprintParticipants = document.createElement('div');
+        sprintParticipants.className = 'sprint-participants';
+        sprintParticipants.textContent = 'Participants';
+        sprintHeader.appendChild(sprintParticipants);
+
+        // create sprint content and append it to sprintHeader
+        const sprintContent = document.createElement('div');
+        sprintContent.className = 'sprint-content';
+        sprintContent.textContent = 'Sprint content';
+        sprintElement.appendChild(sprintContent);
+
+        // add final
+        sprintList.appendChild(sprintElement);
+    });
+}
   
 function switchToProject(project) {
     currentProject = project;
     renderProjects(); // Обновить список проектов
     updateProjectName(); // Обновить имя проекта
+    renderSprints(project); // Обновить список спринтов
 }
 
 function updateProjectName() {
@@ -254,33 +375,18 @@ function updateProjectName() {
 }
 
 
-document.querySelectorAll('.sprint-content').forEach(sprintContent => {
-    sprintContent.dataset.height = sprintContent.scrollHeight; // сохраняем исходную высоту
-    sprintContent.style.height = sprintContent.scrollHeight + 'px';
-});
 
-document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
-    let isExpanded = true;
-    let svg = button.querySelector('.expand-sprint-content-button-svg'); // Находим SVG
-    const sprintContent = button.closest('.sprint').querySelector('.sprint-content');
-    // Сохраняем начальную высоту в data-height
-    sprintContent.dataset.height = sprintContent.scrollHeight;
 
-    button.addEventListener('click', function() {
-        svg.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
-        svg.style.transition = 'transform 0.4s';
-        if (isExpanded) {
-            requestAnimationFrame(() => {
-                sprintContent.style.height = '0';
-            });
-        } else {
-            requestAnimationFrame(() => {
-                sprintContent.style.height = sprintContent.dataset.height + 'px';
-            });
-        }
-        isExpanded = !isExpanded;
-    });
-});
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -306,7 +412,22 @@ function initData() {
 
     // create sprints
 
+    // sprints for Apollo Initiative
+    projects[0].addSprint()
+    projects[0].addSprint()
+    projects[0].addSprint()
+    projects[0].addSprint()
+    projects[0].addSprint()
+
     // create tasks
+    // for Apollo Initiative for sprint 1
+    projects[0].sprints[0].tasks.push(new Task("Task 1", "done"));
+    projects[0].sprints[0].tasks.push(new Task("Task 2", "in progress"));
+
+    // for Apollo Initiative for sprint 2
+    projects[0].sprints[1].tasks.push(new Task("Task 3", "done"));
+    projects[0].sprints[1].tasks.push(new Task("Task 4", "not started"));
+
 
 
     currentUser = users[0];
@@ -320,3 +441,36 @@ switchToProject(currentProject);
 console.log("test");
 console.log(users);
 console.log(projects);
+
+
+
+// для сворачивания блока sprint-content
+document.querySelectorAll('.sprint-content').forEach(sprintContent => {
+    sprintContent.dataset.height = sprintContent.scrollHeight; // сохраняем исходную высоту
+    sprintContent.style.height = sprintContent.scrollHeight + 'px';
+});
+
+document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
+    
+    let isExpanded = true;
+    let svg = button.querySelector('.expand-sprint-content-button-svg'); // Находим SVG
+    const sprintContent = button.closest('.sprint').querySelector('.sprint-content');
+    // Сохраняем начальную высоту в data-height
+    sprintContent.dataset.height = sprintContent.scrollHeight;
+
+    button.addEventListener('click', function() {
+        console.log("button");
+        svg.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
+        svg.style.transition = 'transform 0.4s';
+        if (isExpanded) {
+            requestAnimationFrame(() => {
+                sprintContent.style.height = '0';
+            });
+        } else {
+            requestAnimationFrame(() => {
+                sprintContent.style.height = sprintContent.dataset.height + 'px';
+            });
+        }
+        isExpanded = !isExpanded;
+    });
+});
