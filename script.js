@@ -1,4 +1,29 @@
+import compose from './compose.js';
 import graphics from './graphics.js';
+
+// dasfa
+
+class User {
+    constructor(fullName, email, username, password, avatarFile) {
+        this.fullName = fullName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.avatarFile = avatarFile;
+    }
+
+    async setUserAvatar(avatarFile) {
+        const avatarBase64 = await getBase64(avatarFile);
+        const db = await this.openDB();
+        const tx = db.transaction('avatars', 'readwrite');
+        const store = tx.objectStore('avatars');
+        store.put(avatarBase64, this.username);
+        return tx.complete;
+    }
+}
+
+
+
 // jira logo animation
 const jiraLogoBox = document.querySelector('.jira-logo');
 const upperSvgElement = document.querySelector('#svg-jira-logo-upper-element');
@@ -14,7 +39,6 @@ let jiraLogoTranslateX = 0;
 let jiraLogoTranslateY = 0;
 let jiraLogoScalingUp = false;
 let jiraLogoScalingDown = false;
-
 
 function animateJiraLogo() {
     if (jiraLogoScalingUp && jiraLogoScale < 1.2) {
@@ -179,12 +203,7 @@ document.addEventListener('click', function(event) {
 
 // ----------------------------
 
-class User {
-    constructor(fullName, email) {
-        this.fullName = fullName;
-        this.email = email;
-    }
-}
+
 
 class Project {
     constructor(name) {
@@ -233,13 +252,13 @@ class Backlog {
 }
 
 class Task {
-    constructor(priority, title, status, dueDate, storyPoints, assignee, description) {
+    constructor(priority, title, status, dueDate, storyPoints, assigneeUsername, description) {
         this.priority = priority;
         this.title = title;
         this.status = status;
         this.dueDate = dueDate;
         this.storyPoints = storyPoints;
-        this.assignee = assignee;
+        this.assigneeUsername = assigneeUsername;
         this.description = description;
         this.comments = [];
         this.files = [];
@@ -336,100 +355,11 @@ function renderBacklog(project) {
 }
 
 function renderSprints(project) {
-    aafsd
     const sprintList = document.querySelector('.sprint-list');
     sprintList.innerHTML = ''; // clear the sprint list
 
     project.sprints.forEach(sprint => {
-        // create sprint
-        const sprintElement = document.createElement('div');
-        sprintElement.className = 'sprint';
-
-        // create sprint header and append it to sprint
-        const sprintHeader = document.createElement('div');
-        sprintHeader.className = 'sprint-header';
-        sprintElement.appendChild(sprintHeader);
-
-        // create sprint main info and append it to sprintHeader
-        const sprintMainInfo = document.createElement('div');
-        sprintMainInfo.className = 'sprint-main-info';
-        sprintHeader.appendChild(sprintMainInfo);
-
-        // create sprint data and append it to sprintMainInfo
-        const sprintData = document.createElement('div');
-        sprintData.className = 'sprint-data';
-        sprintMainInfo.appendChild(sprintData);
-
-        // create hide sprint button and append it to sprintHeader
-        const hideSprintMainInfoButton = document.createElement('div');
-        hideSprintMainInfoButton.className = 'hide-sprint-main-info-button';
-        sprintData.appendChild(hideSprintMainInfoButton);
-
-        // add svg to hideSprintMainInfoButton
-        const expandSprintContentButtonSvg = graphics.createSvgElement();
-        hideSprintMainInfoButton.appendChild(expandSprintContentButtonSvg);
-        
-        // create sprint name and append it to sprintData
-        const sprintName = document.createElement('div');
-        sprintName.className = 'sprint-name';
-        sprintName.textContent = `${project.name} ${sprint.orderNumInProject}`;
-        sprintData.appendChild(sprintName);
-
-        // create sprint dates and append it to sprintData
-        const sprintDates = document.createElement('div');
-        sprintDates.className = 'sprint-dates';
-        sprintDates.textContent = `${('0' + sprint.startDate.getDate()).slice(-2)}.${('0' + (sprint.startDate.getMonth() + 1)).slice(-2)} - ${('0' + sprint.endDate.getDate()).slice(-2)}.${('0' + (sprint.endDate.getMonth() + 1)).slice(-2)}`;
-        sprintData.appendChild(sprintDates);
-
-        // create sprint issues amount and append it to sprintData
-        const sprintIssuesAmount = document.createElement('div');
-        sprintIssuesAmount.className = 'sprint-issues-amount';
-        sprintIssuesAmount.textContent = `${sprint.tasks.length} issues`;
-        sprintData.appendChild(sprintIssuesAmount);
-
-        // create sptint labels and append it to sprintData
-        const sprintLabel = document.createElement('div');
-        sprintLabel.className = 'sprint-label';
-        sprintLabel.textContent = `${sprint.status}`;
-        sprintData.appendChild(sprintLabel);
-
-        // create sprint container with issues status and append it to sprint main info
-        const sprintContainerWithTasksStatus = document.createElement('div');
-        sprintContainerWithTasksStatus.className = 'sprint-container-with-tasks-status-or-manage-sprint';
-        sprintMainInfo.appendChild(sprintContainerWithTasksStatus);
-
-        // create not started tasks and append it to sprintContainerWithTasksStatus
-        const notStartedTasks = document.createElement('div');
-        notStartedTasks.className = 'not-started-tasks';
-        notStartedTasks.textContent = sprint.tasks.filter(task => task.status === 'not started').length;
-        sprintContainerWithTasksStatus.appendChild(notStartedTasks);
-
-        // create in progress tasks and append it to sprintContainerWithTasksStatus
-        const inProgressTasks = document.createElement('div');
-        inProgressTasks.className = 'in-progress-tasks';
-        inProgressTasks.textContent = sprint.tasks.filter(task => task.status === 'in progress').length;
-        sprintContainerWithTasksStatus.appendChild(inProgressTasks);
-
-        // create done tasks and append it to sprintContainerWithTasksStatus
-        const doneTasks = document.createElement('div');
-        doneTasks.className = 'done-tasks';
-        doneTasks.textContent = sprint.tasks.filter(task => task.status === 'done').length;
-        sprintContainerWithTasksStatus.appendChild(doneTasks);
-
-        // create sprint participants and append it to sprintHeader
-        const sprintParticipants = document.createElement('div');
-        sprintParticipants.className = 'sprint-participants';
-        sprintParticipants.textContent = 'Participants';
-        sprintHeader.appendChild(sprintParticipants);
-
-        // create sprint content and append it to sprintHeader
-        const sprintContent = document.createElement('div');
-        sprintContent.className = 'sprint-content';
-        sprintContent.textContent = 'Sprint content';
-        sprintElement.appendChild(sprintContent);
-
-        // add final
-        sprintList.appendChild(sprintElement);
+        sprintList.appendChild(compose.composeSprintInHtml(sprint, project));
     });
 }
   
@@ -483,9 +413,7 @@ function initData() {
     projects.push(new Project("Nebula Quest"));
     projects.push(new Project("Pioneer Endeavor"));
 
-    // create sprints
-
-    // sprints for Apollo Initiative
+    // fill data for Apollo Initiative
     projects[0].addSprint()
     projects[0].addSprint()
     projects[0].addSprint()
@@ -494,17 +422,28 @@ function initData() {
 
     // create tasks
     // for Apollo Initiative for sprint 1
-    projects[0].sprints[0].tasks.push(new Task("Task 1", "done"));
-    projects[0].sprints[0].tasks.push(new Task("Task 2", "in progress"));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Implement user login and registration', 'IN PROGRESS', '2024-06-20', 5, null, 'Implement the functionality for user login and registration.'));
+    projects[0].sprints[0].tasks.push(new Task('major', 'Database schema design for project', 'NOT STARTED', '2024-06-19', 8, null, 'Design the database schema for the new project.'));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Create project documentation', 'DONE', '2024-06-22', 3, null, 'Create detailed documentation for the project.'));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Set up CI/CD pipeline', 'IN PROGRESS', '2024-06-24', 5, null, 'Set up a continuous integration and continuous deployment pipeline for the project.'));
 
     // for Apollo Initiative for sprint 2
-    projects[0].sprints[1].tasks.push(new Task("Task 3", "done"));
-    projects[0].sprints[1].tasks.push(new Task("Task 4", "not started"));
+    projects[0].sprints[1].tasks.push(new Task('major', 'Develop API endpoints', 'IN PROGRESS', '2024-06-25', 13, null, 'Develop the required API endpoints for the project.'));
+    projects[0].sprints[1].tasks.push(new Task('major', 'Optimize application performance', 'NOT STARTED', '2024-06-26', 8, null, 'Optimize the performance of the application.'));
+    projects[0].sprints[1].tasks.push(new Task('minor', 'Write unit tests for new features', 'DONE', '2024-06-27', 3, null, 'Write unit tests for the newly implemented features.'));
+
+    // for Apollo Initiative for sprint 3
+    projects[0].sprints[2].tasks.push(new Task('minor', 'Design user interface for dashboard', 'IN PROGRESS', '2024-06-28', 5, null, 'Design the user interface for the project dashboard.'));
+    projects[0].sprints[2].tasks.push(new Task('major', 'Implement authentication module', 'NOT STARTED', '2024-06-29', 13, null, 'Implement the authentication module for the application.'));
+
+    // for Apollo Initiative for sprint 4 will be empty
+    // for Apollo Initiative for sprint 5 will be empty
 
     // for Apollo Initiative for backlog
-    projects[0].backlog.tasks.push(new Task("Task 999", "not started"));
-    projects[0].backlog.tasks.push(new Task("Task 998", "not started"));
-    projects[0].backlog.tasks.push(new Task("Task 997", "not started"));
+    projects[0].backlog.tasks.push(new Task('major', 'Refactor codebase', 'NOT STARTED', '2024-06-30', 8, null, 'Refactor the existing codebase to improve readability and maintainability.'));
+    projects[0].backlog.tasks.push(new Task('minor', 'Conduct user research', 'IN PROGRESS', '2024-07-01', 3, null, 'Conduct research to gather user feedback and requirements.'));
+    projects[0].backlog.tasks.push(new Task('minor', 'Prepare deployment scripts', 'DONE', '2024-07-02', 5, null, 'Prepare scripts for deploying the application to the production environment.'));
+
 
 
 
@@ -571,3 +510,10 @@ document.addEventListener('click', function(event) {
         document.getElementById('create-sprint-section').style.display = 'none';
     }
 });
+
+
+
+
+// let testTask = new Task('major', 'Do something', 'DONE', new Date('2021-12-31'), 5, 'John Doe', 'Lorem ipsum');
+// document.querySelector('body').appendChild(compose.composeTaskInHtml(testTask));
+// console.log(testTask)
