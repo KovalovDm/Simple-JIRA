@@ -1,5 +1,4 @@
 import graphics from './graphics.js';
-
 // jira logo animation
 const jiraLogoBox = document.querySelector('.jira-logo');
 const upperSvgElement = document.querySelector('#svg-jira-logo-upper-element');
@@ -191,7 +190,7 @@ class Project {
     constructor(name) {
         this.name = name;
         this.sprints = []
-        this.backlog;
+        this.backlog = new Backlog();
     }
 
     addSprint() {
@@ -209,6 +208,7 @@ class Project {
         endDate.setDate(endDate.getDate() + 14);
 
         this.sprints.push(new Sprint(orderNumInProject, startDate, endDate));
+        renderSprints(this);
     }
 }
 
@@ -220,12 +220,29 @@ class Sprint {
         this.status = status;
         this.tasks = [];
     }
+
+    addTask(task) {
+        this.tasks.push(task);
+    }
+}
+
+class Backlog {
+    constructor() {
+        this.tasks = [];
+    }
 }
 
 class Task {
-    constructor(title, status) {
+    constructor(priority, title, status, dueDate, storyPoints, assignee, description) {
+        this.priority = priority;
         this.title = title;
         this.status = status;
+        this.dueDate = dueDate;
+        this.storyPoints = storyPoints;
+        this.assignee = assignee;
+        this.description = description;
+        this.comments = [];
+        this.files = [];
     }
 }
 
@@ -264,7 +281,62 @@ function renderProjects() {
     });
 }
 
+function renderBacklog(project) {
+    const mainContent = document.querySelector('.main-content');
+    const backlog = mainContent.querySelector('#backlog');
+    backlog.innerHTML = '';
+
+    // create header and append it to backlog
+    const backlogHeader = document.createElement('div');
+    backlogHeader.className = 'sprint-header';
+    backlog.appendChild(backlogHeader);
+
+    // create backlog main info and append it to backlogHeader
+    const backlogMainInfo = document.createElement('div');
+    backlogMainInfo.className = 'sprint-main-info';
+    backlogHeader.appendChild(backlogMainInfo);
+
+    // create backlog content and append it to backlog
+    const backlogContent = document.createElement('div');
+    backlogContent.className = 'sprint-content';
+    backlogContent.textContent = 'Backlog content';
+    backlog.appendChild(backlogContent);
+
+    // create backlog data and append it to backlogMainInfo
+    const backlogData = document.createElement('div');
+    backlogData.className = 'sprint-data';
+    backlogMainInfo.appendChild(backlogData);
+
+    // create backlog container with mange status button and append it to backlogMainInfo
+    const backlogContainerWithManageStatusButton = document.createElement('div');
+    backlogContainerWithManageStatusButton.className = 'sprint-container-with-tasks-status-or-manage-sprint';
+    backlogMainInfo.appendChild(backlogContainerWithManageStatusButton);
+
+    // create button to manage sprints and append it to backlogContainerWithManageStatusButton
+    const manageSprintButton = document.createElement('button');
+    manageSprintButton.id = 'create-sprint-button';
+    manageSprintButton.className = 'manage-sprint-button';
+    manageSprintButton.textContent = 'Create sprint';
+    backlogContainerWithManageStatusButton.appendChild(manageSprintButton);
+
+
+    // create backlog name and append it to backlogData
+    const backlogName = document.createElement('div');
+    backlogName.className = 'sprint-name';
+    backlogName.textContent = 'Backlog';
+    backlogData.appendChild(backlogName);
+
+    // create backlog tasks amount and append it to backlogData
+    const backlogTasksAmount = document.createElement('div');
+    backlogTasksAmount.className = 'sprint-issues-amount';
+    backlogTasksAmount.textContent = `${project.backlog.tasks.length} issues`;
+    backlogData.appendChild(backlogTasksAmount);
+
+    
+}
+
 function renderSprints(project) {
+    aafsd
     const sprintList = document.querySelector('.sprint-list');
     sprintList.innerHTML = ''; // clear the sprint list
 
@@ -323,7 +395,7 @@ function renderSprints(project) {
 
         // create sprint container with issues status and append it to sprint main info
         const sprintContainerWithTasksStatus = document.createElement('div');
-        sprintContainerWithTasksStatus.className = 'sprint-container-with-tasks-status';
+        sprintContainerWithTasksStatus.className = 'sprint-container-with-tasks-status-or-manage-sprint';
         sprintMainInfo.appendChild(sprintContainerWithTasksStatus);
 
         // create not started tasks and append it to sprintContainerWithTasksStatus
@@ -366,6 +438,7 @@ function switchToProject(project) {
     renderProjects(); // Обновить список проектов
     updateProjectName(); // Обновить имя проекта
     renderSprints(project); // Обновить список спринтов
+    renderBacklog(project); // Обновить беклог
 }
 
 function updateProjectName() {
@@ -428,6 +501,12 @@ function initData() {
     projects[0].sprints[1].tasks.push(new Task("Task 3", "done"));
     projects[0].sprints[1].tasks.push(new Task("Task 4", "not started"));
 
+    // for Apollo Initiative for backlog
+    projects[0].backlog.tasks.push(new Task("Task 999", "not started"));
+    projects[0].backlog.tasks.push(new Task("Task 998", "not started"));
+    projects[0].backlog.tasks.push(new Task("Task 997", "not started"));
+
+
 
 
     currentUser = users[0];
@@ -473,4 +552,22 @@ document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
         }
         isExpanded = !isExpanded;
     });
+});
+
+
+// Получить кнопки
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'create-sprint-button') {
+        document.getElementById('create-sprint-section').style.display = 'flex';
+    } else if (event.target.classList.contains('create-dialogue-cancel-button')) {
+        document.getElementById('create-sprint-section').style.display = 'none';
+    } else if (event.target.classList.contains('create-dialogue-create-button')) {
+        // Создать новый спринт
+        // Добавить новый спринт в текущий проект
+        currentProject.addSprint();
+        // Скрыть окно
+        document.getElementById('create-sprint-section').style.display = 'none';
+    } else if (!document.getElementById('create-sprint-section').contains(event.target)) {
+        document.getElementById('create-sprint-section').style.display = 'none';
+    }
 });
