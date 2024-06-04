@@ -1,26 +1,131 @@
 import compose from './compose.js';
 import graphics from './graphics.js';
 
-// dasfa
 
+// HELPERS
+
+/**
+ * Fetches an image from the specified URL and returns it as a Blob object.
+ * @param {string} url - The URL of the image to fetch.
+ * @returns {Promise<Blob>} A Promise that resolves to the fetched image as a Blob object.
+ */
+async function fetchImageAsBlob(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return blob;
+}
+
+/**
+ * Creates a new user object with the provided information.
+ *
+ * @param {string} fullName - The full name of the user.
+ * @param {string} email - The email address of the user.
+ * @param {string} role - The role of the user.
+ * @param {string} occupation - The occupation of the user.
+ * @param {string} username - The username of the user.
+ * @param {string} password - The password of the user.
+ * @param {string} avatarUrl - The URL of the user's avatar image.
+ * @returns {Promise<User>} A promise that resolves to the created user object.
+ */
+async function createUser(fullName, email, role, occupation, username, password, avatarUrl) {
+    if (avatarUrl === null) {
+        avatarUrl = './images/default-avatar.jpg'; // in the future it can be replaced by automatic creation of svg picture with random color background and user initials
+    }
+    const avatarFile = await fetchImageAsBlob(avatarUrl);
+    const user = new User(fullName, email, role, occupation, username, password, avatarFile);
+    return user;
+}
+
+/**
+ * Updates the user profile in the DOM.
+ *
+ * @param {Object} user - The user object containing profile information.
+ */
+function updateUserProfile(user) {
+    const userAccount = document.querySelector('.user-account');
+    userAccount.innerHTML = '';
+    userAccount.appendChild(compose.composeUserProfileInHtml(user));
+}
+
+
+// ENTITIES
+
+/**
+ * Represents a user.
+ * @class
+ */
 class User {
-    constructor(fullName, email, username, password, avatarFile) {
+    /**
+     * Creates a new User instance.
+     * @constructor
+     * @param {string} fullName - The full name of the user.
+     * @param {string} email - The email address of the user.
+     * @param {string} role - The role of the user.
+     * @param {string} occupation - The occupation of the user.
+     * @param {string} username - The username of the user.
+     * @param {string} password - The password of the user.
+     * @param {File} avatarFile - The avatar file of the user.
+     */
+    constructor(fullName, email, role, occupation, username, password, avatarFile) {
         this.fullName = fullName;
         this.email = email;
+        this.role = role;
+        this.occupation = occupation;
         this.username = username;
         this.password = password;
         this.avatarFile = avatarFile;
+        this.saveAvatarToLocalStorage();
     }
 
-    async setUserAvatar(avatarFile) {
-        const avatarBase64 = await getBase64(avatarFile);
-        const db = await this.openDB();
-        const tx = db.transaction('avatars', 'readwrite');
-        const store = tx.objectStore('avatars');
-        store.put(avatarBase64, this.username);
-        return tx.complete;
+    /**
+     * Saves the avatar file to local storage.
+     */
+    saveAvatarToLocalStorage() {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            localStorage.setItem(this.username + '_avatar', reader.result);
+        };
+        reader.readAsDataURL(this.avatarFile);
     }
 }
+
+
+
+
+
+
+
+
+let users = [];
+let currentUser = null;
+
+// 
+// TEST DATA
+async function initTestUsers() {
+    users.push(await createUser('John Doe', 'john.doe@example.com', 'admin', 'Software Engineer', 'john_doe', 'password123', './test_data/john-doe.jpg'));
+    users.push(await createUser('Jane Smith', 'jane.smith@example.com', 'regular', 'Product Manager', 'jane_smith', 'password123', './test_data/jane-smith.jpg'));
+    users.push(await createUser('Alice Johnson', 'alice.johnson@example.com', 'regular', 'UX Designer', 'alice_johnson', 'password123', './test_data/alice-johnson.jpg'));
+    users.push(await createUser('Bob Brown', 'bob.brown@example.com', 'admin', 'Data Scientist', 'bob_brown', 'password123', './test_data/bob-brown.png'));
+    users.push(await createUser('Charlie Davis', 'charlie.davis@example.com', 'regular', 'DevOps Engineer', 'charlie_davis', 'password123', './test_data/charlie-davis.png'));
+    users.push(await createUser('Diana Evans', 'diana.evans@example.com', 'regular', 'QA Engineer', 'diana_evans', 'password123', null));
+    users.push(await createUser('Edward Harris', 'edward.harris@example.com', 'admin', 'System Administrator', 'edward_harris', 'password123', null));
+    users.push(await createUser('Fiona Green', 'fiona.green@example.com', 'regular', 'Marketing Specialist', 'fiona_green', 'password123', './test_data/fiona-green.png'));
+    users.push(await createUser('George Hall', 'george.hall@example.com', 'regular', 'Business Analyst', 'george_hall', 'password123', null));
+    users.push(await createUser('Hannah King', 'hannah.king@example.com', 'admin', 'Chief Technology Officer', 'hannah_king', 'password123', null));
+
+
+}
+
+initTestUsers().then(() => {
+    currentUser = users[0];
+    updateUserProfile(currentUser);
+});
+
+
+
+
+
+
 
 
 
@@ -77,7 +182,12 @@ jiraLogoBox.addEventListener('mouseover', () => {
 
 
 
-// design
+// async function getUsersFromDB() {
+//     const db = await openDB(); // предполагается, что у вас есть функция openDB
+//     const transaction = db.transaction('users', 'readonly'); // предполагается, что у вас есть хранилище объектов 'users'
+//     const store = transaction.objectStore('users');
+//     return store.getAll();
+// }
 
 // position the list of projects container to the right of the sidebar
 window.onload = function() {
@@ -87,6 +197,7 @@ window.onload = function() {
     var sidebarWidth = sidebarContainer.offsetWidth;
     listOfProjectsContainer.style.left = sidebarWidth + 'px';
 };
+
 
 
 // show the list of projects when hovering over the "All projects" button
@@ -124,13 +235,6 @@ document.addEventListener('click', function(event) {
 });
 
 
-// class Task {
-//     constructor(title, description, status) {
-//         this.title = title;
-//         this.description = description;
-//         this.status = status;
-//     }
-// }
 
 // class Sprint {
 //     constructor(name, startDate, endDate) {
@@ -184,21 +288,6 @@ document.addEventListener('click', function(event) {
 //     }
 // }
 
-// // indexDB
-// let db;
-// let dbReq = indexedDB.open('projectDatabase', 1);
-// dbReq.onupgradeneeded = function(event) {
-//     db = event.target.result;
-//     let users = db.createObjectStore('users', {keyPath: 'email'});
-// }
-
-// dbReq.onsuccess = function(event) {
-//     db = event.target.result;
-//     console.log('success opening database');
-// }
-// dbReq.onerror = function(event) {
-//     console.log('error opening database ' + event.target.errorCode);
-// }
 
 
 // ----------------------------
@@ -265,8 +354,6 @@ class Task {
     }
 }
 
-let users = [];
-let currentUser = null;
 
 let projects = [];
 let currentProject = null;
@@ -302,56 +389,8 @@ function renderProjects() {
 
 function renderBacklog(project) {
     const mainContent = document.querySelector('.main-content');
-    const backlog = mainContent.querySelector('#backlog');
-    backlog.innerHTML = '';
-
-    // create header and append it to backlog
-    const backlogHeader = document.createElement('div');
-    backlogHeader.className = 'sprint-header';
-    backlog.appendChild(backlogHeader);
-
-    // create backlog main info and append it to backlogHeader
-    const backlogMainInfo = document.createElement('div');
-    backlogMainInfo.className = 'sprint-main-info';
-    backlogHeader.appendChild(backlogMainInfo);
-
-    // create backlog content and append it to backlog
-    const backlogContent = document.createElement('div');
-    backlogContent.className = 'sprint-content';
-    backlogContent.textContent = 'Backlog content';
-    backlog.appendChild(backlogContent);
-
-    // create backlog data and append it to backlogMainInfo
-    const backlogData = document.createElement('div');
-    backlogData.className = 'sprint-data';
-    backlogMainInfo.appendChild(backlogData);
-
-    // create backlog container with mange status button and append it to backlogMainInfo
-    const backlogContainerWithManageStatusButton = document.createElement('div');
-    backlogContainerWithManageStatusButton.className = 'sprint-container-with-tasks-status-or-manage-sprint';
-    backlogMainInfo.appendChild(backlogContainerWithManageStatusButton);
-
-    // create button to manage sprints and append it to backlogContainerWithManageStatusButton
-    const manageSprintButton = document.createElement('button');
-    manageSprintButton.id = 'create-sprint-button';
-    manageSprintButton.className = 'manage-sprint-button';
-    manageSprintButton.textContent = 'Create sprint';
-    backlogContainerWithManageStatusButton.appendChild(manageSprintButton);
-
-
-    // create backlog name and append it to backlogData
-    const backlogName = document.createElement('div');
-    backlogName.className = 'sprint-name';
-    backlogName.textContent = 'Backlog';
-    backlogData.appendChild(backlogName);
-
-    // create backlog tasks amount and append it to backlogData
-    const backlogTasksAmount = document.createElement('div');
-    backlogTasksAmount.className = 'sprint-issues-amount';
-    backlogTasksAmount.textContent = `${project.backlog.tasks.length} issues`;
-    backlogData.appendChild(backlogTasksAmount);
-
-    
+    const newBacklog = compose.composeBacklogInHtml(project)
+    mainContent.replaceChild(newBacklog, mainContent.querySelector('#backlog'));
 }
 
 function renderSprints(project) {
@@ -361,50 +400,32 @@ function renderSprints(project) {
     project.sprints.forEach(sprint => {
         sprintList.appendChild(compose.composeSprintInHtml(sprint, project));
     });
+
+    document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
+        button.dataset.isExpanded = 'true';
+    });
 }
   
 function switchToProject(project) {
     currentProject = project;
     renderProjects(); // Обновить список проектов
-    updateProjectName(); // Обновить имя проекта
+    updateHeaderForBacklog(); // Обновить имя проекта
     renderSprints(project); // Обновить список спринтов
     renderBacklog(project); // Обновить беклог
 }
 
-function updateProjectName() {
-    let projectNameElement = document.querySelector('.project-name');
+function updateHeaderForBacklog() {
+    const mainElement = document.querySelector('main');
+    const currentHeader = document.querySelector('.main-header');
+    const updateHeaderForBacklog = compose.composeHeaderForBacklogInHtml(currentProject);
+    mainElement.replaceChild(updateHeaderForBacklog, currentHeader);
 
-    projectNameElement.textContent = currentProject.name;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 function initData() {
-    // create users
-    users.push(new User("John Smith", "john.smith@example.com"));
-    users.push(new User("Emily Johnson", "emily.johnson@example.com"));
-    users.push(new User("Michael Williams", "michael.williams@example.com"));
-    users.push(new User("Jessica Brown", "jessica.brown@example.com"));
-    users.push(new User("David Jones", "david.jones@example.com"));
-    users.push(new User("Sarah Miller", "sarah.miller@example.com"));
-    users.push(new User("Daniel Davis", "daniel.davis@example.com"));
-    users.push(new User("Ashley Wilson", "ashley.wilson@example.com"));
-    users.push(new User("James Anderson", "james.anderson@example.com"));
-    users.push(new User("Amanda Thomas", "amanda.thomas@example.com"));
 
     // create projects
     projects.push(new Project("Apollo Initiative"));
@@ -413,6 +434,8 @@ function initData() {
     projects.push(new Project("Nebula Quest"));
     projects.push(new Project("Pioneer Endeavor"));
 
+    currentProject = projects[0];
+
     // fill data for Apollo Initiative
     projects[0].addSprint()
     projects[0].addSprint()
@@ -420,78 +443,74 @@ function initData() {
     projects[0].addSprint()
     projects[0].addSprint()
 
+    projects[0].sprints[0].status = 'ACTIVE';
+
     // create tasks
     // for Apollo Initiative for sprint 1
-    projects[0].sprints[0].tasks.push(new Task('minor', 'Implement user login and registration', 'IN PROGRESS', '2024-06-20', 5, null, 'Implement the functionality for user login and registration.'));
-    projects[0].sprints[0].tasks.push(new Task('major', 'Database schema design for project', 'NOT STARTED', '2024-06-19', 8, null, 'Design the database schema for the new project.'));
-    projects[0].sprints[0].tasks.push(new Task('minor', 'Create project documentation', 'DONE', '2024-06-22', 3, null, 'Create detailed documentation for the project.'));
-    projects[0].sprints[0].tasks.push(new Task('minor', 'Set up CI/CD pipeline', 'IN PROGRESS', '2024-06-24', 5, null, 'Set up a continuous integration and continuous deployment pipeline for the project.'));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Implement user login and registration', 'IN PROGRESS', '2024-06-20', 5, 'john_doe', 'Implement the functionality for user login and registration.'));
+    projects[0].sprints[0].tasks.push(new Task('major', 'Database schema design for project', 'NOT STARTED', '2024-06-19', 8, 'bob_brown', 'Design the database schema for the new project.'));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Create project documentation', 'DONE', '2024-06-22', 3, 'alice_johnson', 'Create detailed documentation for the project.'));
+    projects[0].sprints[0].tasks.push(new Task('minor', 'Set up CI/CD pipeline', 'IN PROGRESS', '2024-06-24', 5, 'alice_johnson', 'Set up a continuous integration and continuous deployment pipeline for the project.'));
 
     // for Apollo Initiative for sprint 2
-    projects[0].sprints[1].tasks.push(new Task('major', 'Develop API endpoints', 'IN PROGRESS', '2024-06-25', 13, null, 'Develop the required API endpoints for the project.'));
-    projects[0].sprints[1].tasks.push(new Task('major', 'Optimize application performance', 'NOT STARTED', '2024-06-26', 8, null, 'Optimize the performance of the application.'));
-    projects[0].sprints[1].tasks.push(new Task('minor', 'Write unit tests for new features', 'DONE', '2024-06-27', 3, null, 'Write unit tests for the newly implemented features.'));
+    projects[0].sprints[1].tasks.push(new Task('major', 'Develop API endpoints', 'NOT STARTED', '2024-06-25', 13, 'charlie_davis', 'Develop the required API endpoints for the project.'));
+    projects[0].sprints[1].tasks.push(new Task('major', 'Optimize application performance', 'NOT STARTED', '2024-06-22', 8, 'diana_evans', 'Optimize the performance of the application.'));
+    projects[0].sprints[1].tasks.push(new Task('minor', 'Write unit tests for new features', 'NOT STARTED', '2024-06-28', 3, 'bob_brown', 'Write unit tests for the newly implemented features.'));
 
     // for Apollo Initiative for sprint 3
-    projects[0].sprints[2].tasks.push(new Task('minor', 'Design user interface for dashboard', 'IN PROGRESS', '2024-06-28', 5, null, 'Design the user interface for the project dashboard.'));
-    projects[0].sprints[2].tasks.push(new Task('major', 'Implement authentication module', 'NOT STARTED', '2024-06-29', 13, null, 'Implement the authentication module for the application.'));
+    projects[0].sprints[2].tasks.push(new Task('minor', 'Design user interface for dashboard', 'NOT STARTED', '2024-07-10', 5, 'fiona_green', 'Design the user interface for the project dashboard.'));
+    projects[0].sprints[2].tasks.push(new Task('major', 'Implement authentication module', 'NOT STARTED', '2024-07-3', 13, 'george_hall', 'Implement the authentication module for the application.'));
 
     // for Apollo Initiative for sprint 4 will be empty
     // for Apollo Initiative for sprint 5 will be empty
 
     // for Apollo Initiative for backlog
-    projects[0].backlog.tasks.push(new Task('major', 'Refactor codebase', 'NOT STARTED', '2024-06-30', 8, null, 'Refactor the existing codebase to improve readability and maintainability.'));
-    projects[0].backlog.tasks.push(new Task('minor', 'Conduct user research', 'IN PROGRESS', '2024-07-01', 3, null, 'Conduct research to gather user feedback and requirements.'));
-    projects[0].backlog.tasks.push(new Task('minor', 'Prepare deployment scripts', 'DONE', '2024-07-02', 5, null, 'Prepare scripts for deploying the application to the production environment.'));
+    projects[0].backlog.tasks.push(new Task('major', 'Refactor codebase', 'NOT STARTED', '2024-06-30', 8, 'hannah_king', 'Refactor the existing codebase to improve readability and maintainability.'));
+    projects[0].backlog.tasks.push(new Task('minor', 'Conduct user research', 'IN PROGRESS', '2024-08-12', 3, 'john_doe', 'Conduct research to gather user feedback and requirements.'));
+    projects[0].backlog.tasks.push(new Task('minor', 'Prepare deployment scripts', 'NOT STARTED', '2024-07-04', 5, 'jane_smith', 'Prepare scripts for deploying the application to the production environment.'));
 
-
-
-
-
-    currentUser = users[0];
-    currentProject = projects[0];
+    //console.log(projects);
+    switchToProject(currentProject);
 }
 
 initData();
-switchToProject(currentProject);
-
-// DEBUG
-console.log("test");
-console.log(users);
-console.log(projects);
 
 
 
-// для сворачивания блока sprint-content
-document.querySelectorAll('.sprint-content').forEach(sprintContent => {
-    sprintContent.dataset.height = sprintContent.scrollHeight; // сохраняем исходную высоту
-    sprintContent.style.height = sprintContent.scrollHeight + 'px';
-});
 
-document.querySelectorAll('.hide-sprint-main-info-button').forEach((button) => {
-    
-    let isExpanded = true;
-    let svg = button.querySelector('.expand-sprint-content-button-svg'); // Находим SVG
+
+
+document.addEventListener('click', function(event) {
+    const button = event.target.closest('.hide-sprint-main-info-button');
+    if (!button) return; // Если клик был не на кнопку, то ничего не делаем
+
+    let isExpanded = button.dataset.isExpanded === 'true';
+    let svg = button.querySelector('.expand-sprint-content-button-svg');
     const sprintContent = button.closest('.sprint').querySelector('.sprint-content');
-    // Сохраняем начальную высоту в data-height
-    sprintContent.dataset.height = sprintContent.scrollHeight;
 
-    button.addEventListener('click', function() {
-        console.log("button");
-        svg.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
-        svg.style.transition = 'transform 0.4s';
-        if (isExpanded) {
-            requestAnimationFrame(() => {
-                sprintContent.style.height = '0';
-            });
-        } else {
-            requestAnimationFrame(() => {
-                sprintContent.style.height = sprintContent.dataset.height + 'px';
-            });
-        }
-        isExpanded = !isExpanded;
-    });
+    // Если высота еще не сохранена, сохраняем ее
+    if (!sprintContent.dataset.height) {
+        sprintContent.dataset.height = sprintContent.scrollHeight;
+        sprintContent.style.height = sprintContent.scrollHeight + 'px';
+    }
+
+    svg.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
+    svg.style.transition = 'transform 0.4s';
+
+    if (isExpanded) {
+        requestAnimationFrame(() => {
+            sprintContent.style.height = '0';
+        });
+    } else {
+        requestAnimationFrame(() => {
+            sprintContent.style.height = sprintContent.dataset.height + 'px';
+        });
+    }
+
+    button.dataset.isExpanded = !isExpanded;
 });
+
+
 
 
 // Получить кнопки
@@ -511,9 +530,55 @@ document.addEventListener('click', function(event) {
     }
 });
 
+document.addEventListener('click', function(event) {
+    if (event.target.closest('.create-issue-container')) {
+        // Обрабатываем событие для элемента с классом 'create-issue-container'
+
+    }
+});
 
 
 
-// let testTask = new Task('major', 'Do something', 'DONE', new Date('2021-12-31'), 5, 'John Doe', 'Lorem ipsum');
-// document.querySelector('body').appendChild(compose.composeTaskInHtml(testTask));
-// console.log(testTask)
+// вызовите функцию с нужным пользователем
+// updateUserProfile(currentUser);
+
+
+
+let dragged;
+
+// Найти все элементы .task и добавить обработчики событий dragstart и dragend
+document.querySelectorAll('.task').forEach(task => {
+  task.draggable = true; // Сделать элементы перетаскиваемыми
+  task.addEventListener('dragstart', handleDragStart, false);
+  task.addEventListener('dragend', handleDragEnd, false);
+  task.addEventListener('dragover', handleDragOver, false);
+  task.addEventListener('drop', handleDrop, false);
+});
+
+// Обработчик события dragstart
+function handleDragStart(e) {
+  dragged = this; // Сохранить ссылку на перетаскиваемый элемент
+  e.dataTransfer.effectAllowed = 'move'; // Указать, что разрешено перемещение
+  e.dataTransfer.setData('text/html', this.outerHTML); // Установить данные перетаскивания на HTML элемента
+}
+
+// Обработчик события dragend
+function handleDragEnd() {
+  dragged = null; // Очистить ссылку на перетаскиваемый элемент
+}
+
+// Обработчик события dragover
+function handleDragOver(e) {
+  e.preventDefault(); // Предотвратить стандартное поведение
+  this.style.border = 'solid 2px #000'; // Добавить границу для визуализации места, куда будет перемещен элемент
+}
+
+// Обработчик события drop
+function handleDrop(e) {
+  e.preventDefault(); // Предотвратить стандартное поведение
+  this.style.border = ''; // Удалить границу
+  if (dragged !== this) { // Проверить, что элемент не перетаскивается сам в себя
+    this.parentNode.removeChild(dragged); // Удалить перетаскиваемый элемент из старого места
+    this.insertAdjacentHTML('beforebegin', e.dataTransfer.getData('text/html')); // Вставить перетаскиваемый элемент в новое место
+  }
+}

@@ -11,19 +11,12 @@
 body {
   display: flex;
   min-height: 100vh;
-  /* background: #F0F4FF; */
-
-  /* DEBUG */
-  background: pink;
 }
 
 #page {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-
-  /* DEBUG */
-  background: yellow;
 }
 
 .sidebar-container {
@@ -31,9 +24,6 @@ body {
   flex-direction: column;
   height: 100vh;
   width: 230px;
-
-  /* DEBUG */
-  background: orange;
 }
 
 .sidebar {
@@ -58,17 +48,34 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  height: 100vh;
+  height: 100vh
+}
+
+#backlog {
+  margin-bottom: 20px;
 }
 
 .main-header {
   display: flex;
+  flex-direction: column;
+  padding: 20px 20px 10px 20px;
+  font-weight: 500;
 
   /* DEBUG */
-  border: 3px solid black;
-  margin: 3px;
-  border-color: grey;
-  background: green;
+  border-bottom: 3px solid rgb(160, 160, 160);
+  /* margin: 3px; */
+}
+
+.project-name {
+  font-size: 1.25rem;
+  
+  /* background-color: #007BFF; */
+  margin: 5px 0px 10px 0px;
+}
+
+.representation-type {
+  /* background-color: orange; */
+  font-size: 1.50rem;
 }
 
 .main-content {
@@ -83,8 +90,7 @@ main {
   /* background: red; */
   /* background-color: #ebf0f7; */
   background-color: white;
-  border: 3px solid black;
-  margin: 3px;
+  /* margin-bottom: 20px; */
   padding: 0px 20px;
 }
 
@@ -203,6 +209,8 @@ main {
 
 .user-profile img {
   width: 42px;
+  height: 42px;
+  object-fit: cover;
   border-radius: 50%;
   border: 2px solid #fff;
 }
@@ -315,23 +323,28 @@ main {
 
 
 
+.sprint-list {
+
+}
+
+
+
+
+
+/*final part start*/
+
+
+
+/* SPRINT */
 
 .sprint {
   display: flex;
   flex-direction: column;
-
-  /* top: 0px; */
   position: sticky;
-
   border-radius: 5px;
   margin-top: 20px;
-  /* margin: 0px 0px 0px 0px; */
-  padding: 20px 35px 0px 35px;
-
-  /* DEBUG */
-  /* background-color: #4f52ba; */
+  padding: 0px 35px 0px 35px;
   background-color: #ebf0f7;
-  /* background: #a734ba; */
 }
 
 .sprint-header {
@@ -340,36 +353,20 @@ main {
   top: 0px;
   z-index: 1;
   flex-direction: column;
-  /* padding-top: 6px;
-  padding-bottom: 9px; */
-  padding: 6px 30px 6px 0px;
-  /* margin: 3px; */
-  /* margin-bottom: 5px; */
-
-  /* DEBUG */
+  padding: 26px 30px 6px 0px;
   background-color: #ebf0f7;
-  /* border-radius: 8px; */
 }
 
 .sprint-main-info {
   display: flex;
-
-  /* DEBUG */
-  /* background-color: red; */
   border-radius: 15px;
 }
-
-
-
 
 .sprint-data {
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-grow: 1;
-
-  /* DEBUG */
-  /* background-color: rgb(11, 203, 217); */
   border-radius: 15px;
 }
 
@@ -379,16 +376,16 @@ main {
   align-items: center;
   width: 30px;
   height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   border-radius: 20%;
-  background-color: rgb(226, 228, 232);
+  background-color: rgb(214, 217, 223);
   cursor: pointer;
-  /* margin: 0 10px; */
 }
 
 .hide-sprint-main-info-button:hover {
-  background-color: rgb(214, 217, 223);
+  background-color: rgb(180, 180, 180);
 }
-
 
 .hide-sprint-main-info-button svg {
   width: 20px;
@@ -402,7 +399,6 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  /* background-color: #42c721; */
   margin: 0 10px;
 }
 
@@ -411,7 +407,6 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  /* background-color: #c72121; */
   margin: 0 10px;
 }
 
@@ -420,7 +415,6 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  /* background-color: #c72121; */
   margin: 0 10px;
 }
 
@@ -436,29 +430,38 @@ main {
   margin: 0 10px;
 }
 
-
 .sprint-container-with-tasks-status-or-manage-sprint {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   border-radius: 6px;
-
-  /* DEBUG */
-  /* background-color: rgb(48, 203, 25); */
   width: 120px;
+}
 
+#sprint-container-with-tasks-status {
+  justify-content: space-between;
+}
+
+#sprint-container-with-manage-sprint-button, #create-sprint-button {
+  justify-content: center;
+  background-color: rgb(214, 217, 223)
+}
+
+#sprint-container-with-manage-sprint-button:hover, #create-sprint-button:hover {
+  background-color: rgb(180, 180, 180);
+}
+
+.manage-sprint-button {
+  display: flex;
+  cursor: pointer;
 }
 
 .not-started-tasks {
   display: flex;
-
   background-color: #f2dcf5;
   color: #a734ba;
   border-radius: 10px;
   justify-content: center;
-
-  /* DEBUG */
   width: 30px;
 }
 
@@ -468,8 +471,6 @@ main {
   color: #2d86ba;
   border-radius: 10px;
   justify-content: center;
-
-  /* DEBUG */
   width: 30px;
 }
 
@@ -479,22 +480,14 @@ main {
   background-color: #d6ede2;
   border-radius: 10px;
   justify-content: center;
-
-  /* DEBUG */
   width: 30px;
 }
 
 .sprint-participants {
   display: flex;
-  /* margin: 4px; */
-  /* margin: 4px 0; */
   margin-top: 8px;
   margin-bottom: 4px;
   padding-left: 30px;
-
-  /* DEBUG */
-  /* background-color: yellow; */
-  /* border-radius: 15px; */
 }
 
 .sprint-participants img {
@@ -510,30 +503,13 @@ main {
   flex-direction: column;
   justify-content: center;
   height: auto;
-
   overflow: hidden;
   transition: height 0.4s ease-in-out;
-
-  /* DEBUG */
-  /* background-color: rgb(81, 203, 181); */
   border-radius: 15px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-/*final part start*/
-
-
-/* TASKS */
+/* TASK */
 
 .task-list-container {
   display: flex;
@@ -550,6 +526,7 @@ main {
   margin: 3px;
   padding: 15px 30px;
   border-radius: 8px;
+  cursor: move;
   background-color: white;
 }
 
@@ -640,13 +617,12 @@ main {
   margin: 0px 6px 0px 40px;
 }
 
-
-
 .comments-amount {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  color: #c3cad3
 }
 
 .task-files-icon {
@@ -662,6 +638,7 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  color: #c3cad3
 }
 
 .avatar-and-estimation-container {
@@ -679,7 +656,6 @@ main {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  /* background-image: url('images/man.jpg'); */
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -724,13 +700,19 @@ main {
   width: 18%;
   height: 35px;
   border-radius: 8px;
+  cursor: pointer;
 
   /* DEBUG */
   /* background-color: rgb(204, 219, 104); */
 }
 
+#create-issue-container-for-backlog {
+  margin: 0px 0px 20px 0px;
+}
+
 .create-issue-container:hover {
   background-color: rgb(214, 217, 223);
+  background-color: rgb(200, 200, 200);
 }
 
 .create-issue-container svg {
@@ -766,46 +748,91 @@ main {
 
 
 
-.create-dialogue-section {
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3; /* Убедитесь, что z-index меньше, чем у вашего диалогового окна */
+  display: block; /* По умолчанию скрыт */
   display: none;
+}
+
+.create-dialogue-section {
   flex-direction: column;
   position: fixed;
-  left: 30%;
-  right: 30%;
-  top: 100px;
-
-  box-shadow: 
-    0px 8px 16px -4px blue, 
-    0px 0px 1px green;
+  box-sizing: border-box;
+  top: 47%;
+  left: 50%;
+  width: 650px;
+  min-height: 200px;
+  transform: translate(-50%, -50%);
+  /* padding: 0 25px; */
+  border-radius: 8px;
   z-index: 4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Добавлено */
 
-  /* DEBUG */
-  background-color: rgb(203, 11, 11);
+  /* background-color: rgb(203, 11, 11); */
+  background-color: white;
   /* display: flex; */
+  display: none;
 }
+
+
 
 .create-dialogue-header {
   display: flex;
   align-items: center;
-
-
-  /* DEBUG */
-  background-color: rgb(174, 203, 11);
+  justify-content: center;
+  padding: 0px 20px;
+  margin: 20px 0px;
+  font-weight: 500;
+  
 }
 
 .create-dialogue-content {
   display: flex;
   flex-direction: column;
-
-  /* DEBUG */
-  background-color: rgb(11, 203, 11);
+  flex: 1 1 auto;
+  padding: 20px 40px;
+  border-top: 2.5px solid rgb(236, 240, 246);
+  border-bottom: 2.5px solid rgb(236, 240, 246);
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .create-dialogue-footer {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin: 10px 0px;
+  padding: 0px 40px 0px 400px;
+}
 
-  /* DEBUG */
-  background-color: rgb(11, 11, 203);
+.create-dialogue-footer button {
+  padding: 7px 20px; /* Добавьте немного отступа вокруг текста кнопки */
+  font-size: 12px; /* Увеличьте размер текста */
+  color: #fff; /* Сделайте текст белым */
+  border: none; /* Удалите границу */
+  border-radius: 5px; /* Сделайте углы кнопки скругленными */
+  cursor: pointer; /* Измените курсор на указатель при наведении */
+}
+
+.create-dialogue-footer .create-dialogue-cancel-button {
+  background-color: #6c757d;
+}
+
+.create-dialogue-footer .create-dialogue-cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.create-dialogue-footer .create-dialogue-create-button {
+  background-color: #007BFF;
+}
+
+.create-dialogue-footer .create-dialogue-create-button:hover {
+  background-color: #0056b3;
 }

@@ -62,28 +62,49 @@
                             Backlog
                         </a>
                     </li>
-    
-                    <h4>
-                        <span>General</span>
-                   
-                    </h4>
                     <li>
                         <a href="#">
                             <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
                             Map
                         </a>
                     </li>
+    
+                    <h4>
+                        <span>General</span>
+                    </h4>
+
                     <li>
                         <a href="#">
                             <span><img src="images/puzzle-white.svg" alt="manage-users" width="24px"></span>
                             Manage users
                         </a>
                     </li>
+                    <h4>
+                        <span>Account</span>
+                        <li>
+                            <a href="#">
+                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                Logout
+                            </a>
+                        </li>
+                    </h4>
                 </ul>
     
                 <div class="user-account">
                     <div class="user-profile">
-                        <img src="images/logo.png" alt="Profile Image"/>
+                        <img src="images/default-avatar.jpg" alt="Profile Image"/>
                         <div class="user-detail">
                             <h3>Eva Murphy</h3>
                             <span>Web Developer</span>
@@ -95,8 +116,8 @@
 
         <main>
             <div class="main-header">
-                <div class="project-name">
-                </div>
+                <div class="project-name"></div>
+                <div class="representation-type"></div>
             </div>
 
             <div class="main-content">
@@ -315,12 +336,14 @@
                         </div>
                     </div>
                     <div class="sprint-content">
-                        backlog task 1<br>
-                        backlog task 1<br>
-                        backlog task 1<br>
-                        backlog task 1<br>
-                        backlog task 1<br>
-                        backlog task 1<br>
+                        <div class="task-list-container">
+                            backlog task 1<br>
+                            backlog task 1<br>
+                            backlog task 1<br>
+                            backlog task 1<br>
+                            backlog task 1<br>
+                            backlog task 1<br>
+                        </div>
                     </div>
 
                 </div>
@@ -339,14 +362,17 @@
         </div>
     </div>
 
-    <section id="create-sprint-section" class="create-dialogue-section">
-        <header class="create-dialogue-header">Create Sprint</header>
-        <div class="create-dialogue-content">
-            Pumba 119:<br>
-            16.05.-30.05.24<br>
-            Status - future<br>
+    <div id="overlay"></div>
 
-            
+    <section id="create-sprint-section" class="create-dialogue-section">
+        <header class="create-dialogue-header"><h2>Create Sprint</h2></header>
+        <div class="create-dialogue-content">
+            <div class="sprint-name-in-create-dialogue">Pumba 119</div>
+            <div class="sprint-status-in-create-dialogue">Status: Future</div>
+            <div class="sprint-dates-in-create-dialogue">Dates: 2021-11-01 - 2021-11-15</div>
+            StartDate: 2021-11-01<br>
+            EndDate: 2021-11-15<br>
+
         </div>
         <footer class="create-dialogue-footer">
             <button class="create-dialogue-cancel-button">Cancel</button>

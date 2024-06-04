@@ -36,6 +36,7 @@ const graphics = {
 
     createSvgHideSprintIcon: function() {
         const svg = document.createElementNS(this.SVG_NS, 'svg');
+        svg.setAttribute('class', 'expand-sprint-content-button-svg');
         svg.setAttribute('xmlns', this.SVG_NS);
         svg.setAttribute('width', '100');
         svg.setAttribute('height', '100');
