@@ -65,12 +65,12 @@
                     <li>
                         <a href="#">
                             <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
-                            Map
+                            Sprint map
                         </a>
                     </li>
     
                     <h4>
-                        <span>General</span>
+                        <span>Admin</span>
                     </h4>
 
                     <li>
@@ -362,8 +362,24 @@
         </div>
     </div>
 
+
+    <!-- overlay -->
     <div id="overlay"></div>
 
+
+    <!-- sections for create dialogues -->
+
+    <!-- basic -->
+    <section class="create-dialogue-section">
+        <header class="create-dialogue-header"><h2></h2></header>
+        <div class="create-dialogue-content"></div>
+        <footer class="create-dialogue-footer">
+            <button class="create-dialogue-cancel-button">Cancel</button>
+            <button class="create-dialogue-create-button">Create</button>
+        </footer>
+    </section>
+
+    <!-- sprint -->
     <section id="create-sprint-section" class="create-dialogue-section">
         <header class="create-dialogue-header"><h2>Create Sprint</h2></header>
         <div class="create-dialogue-content">
@@ -380,8 +396,25 @@
         </footer>
     </section>
 
-    <!-- <div id="create-project-section" class="create-dialogue-container">project</div>
-    <div id="create-task-section" class="create-dialogue-container">task</div> -->
+    <!-- task -->
+    <section id="create-task-section" class="create-dialogue-section">
+        <header class="create-dialogue-header"><h2>Create Task</h2></header>
+        <div class="create-dialogue-content"></div>
+        <footer class="create-dialogue-footer">
+            <button class="create-dialogue-cancel-button">Cancel</button>
+            <button class="create-dialogue-create-button">Create</button>
+        </footer>
+    </section>
+
+    <!-- project -->
+    <section id="create-project-section" class="create-dialogue-section">
+        <header class="create-dialogue-header"><h2>Create Project</h2></header>
+        <div class="create-dialogue-content"></div>
+        <footer class="create-dialogue-footer">
+            <button class="create-dialogue-cancel-button">Cancel</button>
+            <button class="create-dialogue-create-button">Create</button>
+        </footer>
+    </section>
 
     <script type="module" src="script.js"></script>
 </body>

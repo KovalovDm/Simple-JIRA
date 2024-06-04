@@ -117,7 +117,7 @@ async function initTestUsers() {
 }
 
 initTestUsers().then(() => {
-    currentUser = users[0];
+    currentUser = users[3];
     updateUserProfile(currentUser);
 });
 
@@ -513,22 +513,32 @@ document.addEventListener('click', function(event) {
 
 
 
-// Получить кнопки
+function showSprintSection() {
+    document.getElementById('create-sprint-section').style.display = 'flex';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function hideSprintSection() {
+    document.getElementById('create-sprint-section').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
 document.addEventListener('click', function(event) {
-    if (event.target.id === 'create-sprint-button') {
-        document.getElementById('create-sprint-section').style.display = 'flex';
+    if (event.target.id === 'create-sprint-button' || event.target.id === 'create-sprint-container') {
+        showSprintSection();
     } else if (event.target.classList.contains('create-dialogue-cancel-button')) {
-        document.getElementById('create-sprint-section').style.display = 'none';
+        hideSprintSection();
     } else if (event.target.classList.contains('create-dialogue-create-button')) {
         // Создать новый спринт
         // Добавить новый спринт в текущий проект
         currentProject.addSprint();
         // Скрыть окно
-        document.getElementById('create-sprint-section').style.display = 'none';
+        hideSprintSection();
     } else if (!document.getElementById('create-sprint-section').contains(event.target)) {
-        document.getElementById('create-sprint-section').style.display = 'none';
+        hideSprintSection();
     }
 });
+
 
 document.addEventListener('click', function(event) {
     if (event.target.closest('.create-issue-container')) {
@@ -539,46 +549,60 @@ document.addEventListener('click', function(event) {
 
 
 
-// вызовите функцию с нужным пользователем
-// updateUserProfile(currentUser);
 
 
 
-let dragged;
+// drag n drop
+
+
+const taskListContainers = document.querySelectorAll('.task-list-container');
+// console.log(taskListContainers);
 
 // Найти все элементы .task и добавить обработчики событий dragstart и dragend
+let draggingTask = null;
+
 document.querySelectorAll('.task').forEach(task => {
-  task.draggable = true; // Сделать элементы перетаскиваемыми
-  task.addEventListener('dragstart', handleDragStart, false);
-  task.addEventListener('dragend', handleDragEnd, false);
-  task.addEventListener('dragover', handleDragOver, false);
-  task.addEventListener('drop', handleDrop, false);
+    task.draggable = true; // Сделать элементы перетаскиваемыми
+    task.addEventListener('dragstart', () => {
+        task.classList.add('dragging');
+        draggingTask = task;
+    })
+
+    task.addEventListener('dragend', () => {
+        task.classList.remove('dragging');
+        draggingTask = null;
+    });
+})
+
+taskListContainers.forEach(taskListContainer => {
+    const initSortableList = (e) => {
+        e.preventDefault();
+        const siblings = [...taskListContainer.querySelectorAll('.task:not(.dragging)')];
+
+        let nextSibling = siblings.find(sibling => {
+            return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+        });
+
+        if (draggingTask) {
+            taskListContainer.insertBefore(draggingTask, nextSibling);
+        }
+    }
+
+    taskListContainer.addEventListener('dragover', initSortableList);
+    taskListContainer.addEventListener('dragenter', e => e.preventDefault());
 });
 
-// Обработчик события dragstart
-function handleDragStart(e) {
-  dragged = this; // Сохранить ссылку на перетаскиваемый элемент
-  e.dataTransfer.effectAllowed = 'move'; // Указать, что разрешено перемещение
-  e.dataTransfer.setData('text/html', this.outerHTML); // Установить данные перетаскивания на HTML элемента
-}
 
-// Обработчик события dragend
-function handleDragEnd() {
-  dragged = null; // Очистить ссылку на перетаскиваемый элемент
-}
-
-// Обработчик события dragover
-function handleDragOver(e) {
-  e.preventDefault(); // Предотвратить стандартное поведение
-  this.style.border = 'solid 2px #000'; // Добавить границу для визуализации места, куда будет перемещен элемент
-}
-
-// Обработчик события drop
-function handleDrop(e) {
-  e.preventDefault(); // Предотвратить стандартное поведение
-  this.style.border = ''; // Удалить границу
-  if (dragged !== this) { // Проверить, что элемент не перетаскивается сам в себя
-    this.parentNode.removeChild(dragged); // Удалить перетаскиваемый элемент из старого места
-    this.insertAdjacentHTML('beforebegin', e.dataTransfer.getData('text/html')); // Вставить перетаскиваемый элемент в новое место
-  }
+function getDragAfterElement(taskListContainer, y) {
+    const draggableElements = [...taskListContainer.querySelectorAll('.task:not(.dragging)')];
+    const closest = draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.POSITIVE_INFINITY });
+    return closest.element || null;
 }

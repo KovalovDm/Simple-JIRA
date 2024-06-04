@@ -94,6 +94,10 @@ main {
   padding: 0px 20px;
 }
 
+.task.dragging {
+  opacity: 0.5;
+}
+
 .sidebar .sidebar-header {
   display: flex;
   align-items: center;
@@ -195,16 +199,13 @@ main {
   border-radius: 4px;
 }
 
-.user-account {
-  margin-top: auto;
-  padding: 12px 10px;
-  margin-left: -10px;
-}
-
 .user-profile {
   display: flex;
   align-items: center;
   color: #161a2d;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
 }
 
 .user-profile img {
@@ -218,28 +219,18 @@ main {
 .user-profile h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: #161a2d;
 }
 
 .user-profile span {
   font-size: 0.775rem;
   font-weight: 600;
-  color: #fff;
+  color: #161a2d;
 }
 
 .user-detail {
-  margin-left: 23px;
-  white-space: nowrap;
-}
-
-.user-account:hover {
-  background: #fff;
-  border-radius: 4px;
-}
-
-.user-account:hover .user-detail h3,
-.user-account:hover .user-detail span {
-    color: #161a2d;
+  margin-left: 15px;
+  white-space: normal;
 }
 
 
@@ -370,6 +361,10 @@ main {
   border-radius: 15px;
 }
 
+#backlog-sprint-data {
+  height: 30px;
+}
+
 .hide-sprint-main-info-button {
   display: flex;
   justify-content: center;
@@ -442,18 +437,18 @@ main {
   justify-content: space-between;
 }
 
-#sprint-container-with-manage-sprint-button, #create-sprint-button {
+#sprint-container-with-manage-sprint-button, #create-sprint-container {
   justify-content: center;
+  cursor: pointer;
   background-color: rgb(214, 217, 223)
 }
 
-#sprint-container-with-manage-sprint-button:hover, #create-sprint-button:hover {
+#sprint-container-with-manage-sprint-button:hover, #create-sprint-container:hover {
   background-color: rgb(180, 180, 180);
 }
 
 .manage-sprint-button {
   display: flex;
-  cursor: pointer;
 }
 
 .not-started-tasks {
@@ -755,8 +750,7 @@ main {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 3; /* Убедитесь, что z-index меньше, чем у вашего диалогового окна */
-  display: block; /* По умолчанию скрыт */
+  z-index: 3;
   display: none;
 }
 

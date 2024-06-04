@@ -235,15 +235,17 @@ const compose = {
         const sprintMainInfo = document.createElement('div');
         sprintMainInfo.className = 'sprint-main-info';
         const sprintData = document.createElement('div');
+        sprintData.id = 'backlog-sprint-data';
         sprintData.className = 'sprint-data';
         const sprintName = document.createElement('div');
         sprintName.className = 'sprint-name';
         const sprintIssuesAmount = document.createElement('div');
         sprintIssuesAmount.className = 'sprint-issues-amount';
         const createSprintContainer = document.createElement('div');
-        createSprintContainer.id = 'create-sprint-button';
+        createSprintContainer.id = 'create-sprint-container';
         createSprintContainer.className = 'sprint-container-with-tasks-status-or-manage-sprint';
         const createSprintButton = document.createElement('div');
+        createSprintButton.id = 'create-sprint-button';
         createSprintButton.className = 'manage-sprint-button';
         const sprintContent = document.createElement('div');
         sprintContent.className = 'sprint-content';
@@ -279,7 +281,53 @@ const compose = {
 
 
         return backlogElement;
-    }
+    },
+
+    composeBasicCreateDialogue: function() {
+        // create elements
+        const section = document.createElement('section');
+        section.className('create-dialogue-section');
+        const header = document.createElement('header');
+        header.className('create-dialogue-header');
+        const h2 = document.createElement('h2');
+        const div = document.createElement('div');
+        div.className('create-dialogue-content');
+        const footer = document.createElement('footer');
+        footer.className('create-dialogue-footer');
+        const cancelButton = document.createElement('button');
+        cancelButton.className('create-dialogue-cancel-button');
+        const createButton = document.createElement('button');
+        createButton.className('create-dialogue-create-button');
+
+        // add children
+        section.appendChild(header);
+        header.appendChild(h2);
+        section.appendChild(div);
+        section.appendChild(footer);
+        footer.appendChild(cancelButton);
+        footer.appendChild(createButton);
+
+        // fill with data
+        cancelButton.textContent = 'Cancel';
+        createButton.textContent = 'Create';
+
+        return section;
+    }, 
+
+    composeCreateSprintDialogue: function(project) {
+        // create elements
+        const section = this.composeBasicCreateDialogue();
+        section.id = 'create-sprint-section';
+        const h2 = section.querySelector('h2');
+        const div = section.querySelector('div');
+        div.id = 'create-sprint-content';
+
+        // fill with data
+        h2.textContent = 'Create sprint';
+
+
+        return section;
+    },
 };
 
 export default compose;

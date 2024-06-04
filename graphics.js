@@ -123,10 +123,7 @@ const graphics = {
         svg.appendChild(path);
 
         return svg;
-    },
-
-
-    // Other functions...
+    }
 };
 
 export default graphics;
