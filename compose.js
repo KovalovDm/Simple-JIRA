@@ -1,5 +1,10 @@
 import graphics from './graphics.js';
 
+/**
+ * The `compose` object provides utility functions for composing HTML elements.
+ * 
+ * @namespace
+ */
 const compose = {
     composeUserProfileInHtml: function(user) {
         // create elements
@@ -51,6 +56,8 @@ const compose = {
         // create elements
         const taskElement = document.createElement('div');
         taskElement.className = 'task';
+        taskElement.draggable = true; // for drag and drop feature
+        taskElement.setAttribute('data-task-title', task.title); // for matching the html and the real object
         const taskHeader = document.createElement('div');
         taskHeader.className = 'task-header';
         const taskPriority = document.createElement('div');
@@ -155,6 +162,7 @@ const compose = {
         sprintContent.className = 'sprint-content';
         const taskListContainer = document.createElement('div');
         taskListContainer.className = 'task-list-container';
+        taskListContainer.setAttribute('data-sprint-order-num', sprint.orderNumInProject);
         const createIssueContainer = document.createElement('div');
         createIssueContainer.className = 'create-issue-container';
         const addTaskSvgIcon = graphics.createSvgAddTaskIcon();
@@ -279,25 +287,24 @@ const compose = {
         createIssueContainer.appendChild(document.createTextNode('Create issue'))
         createSprintContainer.appendChild(createSprintButton);
 
-
         return backlogElement;
     },
 
     composeBasicCreateDialogue: function() {
         // create elements
         const section = document.createElement('section');
-        section.className('create-dialogue-section');
+        section.className = 'create-dialogue-section';
         const header = document.createElement('header');
-        header.className('create-dialogue-header');
+        header.className = 'create-dialogue-header';
         const h2 = document.createElement('h2');
         const div = document.createElement('div');
-        div.className('create-dialogue-content');
+        div.className = 'create-dialogue-content';
         const footer = document.createElement('footer');
-        footer.className('create-dialogue-footer');
+        footer.className = 'create-dialogue-footer';
         const cancelButton = document.createElement('button');
-        cancelButton.className('create-dialogue-cancel-button');
+        cancelButton.className = 'create-dialogue-cancel-button';
         const createButton = document.createElement('button');
-        createButton.className('create-dialogue-create-button');
+        createButton.className = 'create-dialogue-create-button';
 
         // add children
         section.appendChild(header);
@@ -321,13 +328,35 @@ const compose = {
         const h2 = section.querySelector('h2');
         const div = section.querySelector('div');
         div.id = 'create-sprint-content';
+        const sprintName = document.createElement('div');
+        sprintName.className = 'sprint-name-in-create-dialogue';
 
         // fill with data
         h2.textContent = 'Create sprint';
 
+        // TODO
 
         return section;
     },
+
+    сomposeCreateProjectDialogue: function() {
+        // create elements
+        const section = this.composeBasicCreateDialogue();
+
+        // TODO
+
+        return section;
+    },
+
+    composeCreateTaskDialogue: function() {
+        // create elements
+        const section = this.composeBasicCreateDialogue();
+
+        // TODO
+
+        return section;
+    }
+        
 };
 
 export default compose;

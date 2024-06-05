@@ -1,3 +1,8 @@
+/**
+ * A collection of utility functions for creating SVG elements.
+ *
+ * @namespace graphics
+ */
 const graphics = {
     SVG_NS: 'http://www.w3.org/2000/svg',
 

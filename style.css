@@ -33,15 +33,13 @@ body {
   border-radius: 0 10px 10px 0;
   width: 230px;
   height: 100vh;
-  /* overflow-x: hidden; */
   background: #161a2d;
   padding: 25px 20px;
-  /* transition: width 0.4s ease; */
+}
 
-  /* DEBUG */
-  /* background: red; */
-  /* display: none; */
-  /* width: 85px; */
+.sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
 }
 
 main {
@@ -49,6 +47,29 @@ main {
   flex-direction: column;
   flex-grow: 1;
   height: 100vh
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  stroke: black;
+}
+
+.sidebar-icon path {
+  stroke: #fff;
+}
+
+.sidebar-links li a:hover {
+  color: #161a2d;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.sidebar-links li a:hover .sidebar-icon {
+  stroke: #fff;
+}
+.sidebar-links li a:hover .sidebar-icon path {
+  stroke: #000;
 }
 
 #backlog {
@@ -60,21 +81,15 @@ main {
   flex-direction: column;
   padding: 20px 20px 10px 20px;
   font-weight: 500;
-
-  /* DEBUG */
   border-bottom: 3px solid rgb(160, 160, 160);
-  /* margin: 3px; */
 }
 
 .project-name {
   font-size: 1.25rem;
-  
-  /* background-color: #007BFF; */
   margin: 5px 0px 10px 0px;
 }
 
 .representation-type {
-  /* background-color: orange; */
   font-size: 1.50rem;
 }
 
@@ -83,24 +98,12 @@ main {
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
-
-  /* DEBUG */
-  /* background: rgb(239, 242, 255); */
-  /* background: white; */
-  /* background: red; */
-  /* background-color: #ebf0f7; */
   background-color: white;
-  /* margin-bottom: 20px; */
   padding: 0px 20px;
 }
 
 .task.dragging {
   opacity: 0.5;
-}
-
-.sidebar .sidebar-header {
-  display: flex;
-  align-items: center;
 }
 
 .jira-logo {
@@ -145,16 +148,11 @@ main {
   font-weight: 500;
   white-space: nowrap;
   margin: 10px 0;
-  /* position: relative; */
 }
 
 .sidebar-links h4 span {
   opacity: 1;
 }
-
-/* .sidebar:hover .sidebar-links h4 span {
-  opacity: 1;
-} */
 
 .sidebar-links .menu-separator {
   position: absolute;
@@ -162,11 +160,6 @@ main {
   top: 50%;
   width: 100%;
   height: 1px;
-  /* transform: scaleX(1);
-  transform: translateY(-50%); */
-  /* background: #4f52ba; */
-  /* transform-origin: right;
-  transition-delay: 0.2s; */
 }
 
 .sidebar-links {
@@ -190,13 +183,6 @@ main {
   white-space: nowrap;
   padding: 15px 10px;
   text-decoration: none;
-  /* transition: 0.2s ease; */
-}
-
-.sidebar-links li a:hover {
-  color: #161a2d;
-  background: #fff;
-  border-radius: 4px;
 }
 
 .user-profile {
@@ -233,34 +219,26 @@ main {
   white-space: normal;
 }
 
-
 .list-of-projects-container {
   display: flex;
-  /* display: none; */
   position: fixed;
   flex-direction: column;
   align-items: center;
   width: 240px;
   top: 90px;
   max-height: calc(100vh - 90px);
-
-
+  border-radius: 6px;
   opacity: 0;
   transition: opacity 0.18s ease-in-out;
   pointer-events: none;
-  
-
-  /* DEBUG */
-  background-color: red;
+  background-color: rgb(200, 200, 200);
 }
-
 
 .list-of-projects-container.visible {
   opacity: 1;
   z-index: 2;
-  pointer-events: auto; /* Восстанавливает взаимодействие с элементом */
+  pointer-events: auto;
 }
-
 
 .list-of-projects-header {
   display: flex;
@@ -268,9 +246,7 @@ main {
   align-items: center;
   width: 100%;
   height: 40px;
-  
-  /* DEBUG */
-  background-color: orange;
+  border-bottom: 2px solid rgb(160, 160, 160);
 }
 
 .list-of-projects {
@@ -278,19 +254,13 @@ main {
   flex-direction: column;
   width: 90%;
   overflow-y: auto;
-  
-  /* DEBUG */
-  background-color: purple;
 }
 
 .add-new-project-container {
   display: flex;
   width: 100%;
   justify-content: center;
-
-  /* DEBUG */
-  background: pink;
-  border-radius: 14px;
+  border-top: 2px solid rgb(160, 160, 160);
 }
 
 .project {
@@ -300,30 +270,12 @@ main {
   padding: 5px 5px;
   width: 100%;
   height: 50px;
-
-  /* DEBUG */
-  background-color: green;
   border-radius: 14px;
 }
-
 
 .project.current {
   font-weight: bold;
 }
-
-
-
-
-.sprint-list {
-
-}
-
-
-
-
-
-/*final part start*/
-
 
 
 /* SPRINT */
@@ -665,29 +617,6 @@ main {
   background-color: rgb(223, 226, 230);
 }
 
-
-
-
-/*final part end*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .create-issue-container {
   display: flex;
   align-items: center;
@@ -696,9 +625,6 @@ main {
   height: 35px;
   border-radius: 8px;
   cursor: pointer;
-
-  /* DEBUG */
-  /* background-color: rgb(204, 219, 104); */
 }
 
 #create-issue-container-for-backlog {
@@ -723,9 +649,6 @@ main {
   align-items: center;
   border-radius: 15px;
   padding: 0px 30px 12px 0px;
-
-  /* DEBUG */
-  /* background-color: #c72121; */
 }
 
 .sprint-estimation-number {
@@ -735,13 +658,8 @@ main {
   border-radius: 10px;
   width: 40px;
   margin: 0px 0px 0px 25px;
-
-  /* DEBUG */
   background-color: rgb(214, 217, 223)
 }
-
-
-
 
 #overlay {
   position: fixed;
@@ -763,18 +681,12 @@ main {
   width: 650px;
   min-height: 200px;
   transform: translate(-50%, -50%);
-  /* padding: 0 25px; */
   border-radius: 8px;
   z-index: 4;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Добавлено */
-
-  /* background-color: rgb(203, 11, 11); */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   background-color: white;
-  /* display: flex; */
   display: none;
 }
-
-
 
 .create-dialogue-header {
   display: flex;
@@ -783,7 +695,6 @@ main {
   padding: 0px 20px;
   margin: 20px 0px;
   font-weight: 500;
-  
 }
 
 .create-dialogue-content {
@@ -807,12 +718,12 @@ main {
 }
 
 .create-dialogue-footer button {
-  padding: 7px 20px; /* Добавьте немного отступа вокруг текста кнопки */
-  font-size: 12px; /* Увеличьте размер текста */
-  color: #fff; /* Сделайте текст белым */
-  border: none; /* Удалите границу */
-  border-radius: 5px; /* Сделайте углы кнопки скругленными */
-  cursor: pointer; /* Измените курсор на указатель при наведении */
+  padding: 7px 20px;
+  font-size: 12px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .create-dialogue-footer .create-dialogue-cancel-button {

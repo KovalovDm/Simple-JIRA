@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jira</title>
+    <title>Simple Jira</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -13,9 +13,8 @@
         <div class="sidebar-container">
             <aside class="sidebar">
                 <div class="sidebar-header">
-                    <!-- <img src="images/jira.svg" alt="logo" /> -->
                     <div class="jira-logo">
-                        <!-- bottom jira part-->
+                        <!-- bottom jira logo part-->
                         <svg id="svg-jira-logo-bottom-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1162">
                             <path fill="url(#a)" d="M1075.81.678H.903c0 267.986 217.254 485.231 485.232 485.231h198.631v191.174C684.941 944.58 901.565 1161.49 1169.07 1162V93.935c0-51.503-41.75-93.257-93.26-93.257Z"/>
                             <defs>
@@ -26,7 +25,7 @@
                             </defs>
                         </svg>
     
-                        <!-- middle jira part-->
+                        <!-- middle jira logo part-->
                         <svg id="svg-jira-logo-middle-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1169 1162">
                             <path fill="url(#a)" d="M1074.98.395H.082C.248 268.137 217.248 485.146 485 485.32h198.01v191.796c.341 267.741 217.489 484.604 485.23 484.604V93.661c0-51.503-41.75-93.266-93.26-93.266Z"/>
                             <defs>
@@ -37,7 +36,7 @@
                             </defs>
                         </svg>
             
-                    <!-- upper jira part-->
+                        <!-- upper jira logo part-->
                         <svg id="svg-jira-logo-upper-element" class="svg-jira-logo-part" xmlns="http://www.w3.org/2000/svg" width="280" fill="none" viewBox="0 0 1170 1163">
                             <path fill="#2684FF" d="M1075.85.807H.938a485.232 485.232 0 0 0 485.231 485.231H684.18v191.183c.175 267.742 217.175 484.749 484.92 484.929V94.055c0-51.485-41.74-93.248-93.25-93.248Z"/>
                         </svg>
@@ -48,23 +47,34 @@
                 <ul class="sidebar-links">
                     <h4>
                         <span>Main Menu</span>
-                      
                     </h4>
                     <li id="all-projects">
                         <a href="#">
-                            <span><img src="images/puzzle-white.svg" alt="projects" width="24px"></span>
+                            <span>
+                                <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                                    <path fill="currentColor" d="M675.83 359.228c-15.478 0-29.883 4.053-42.677 9.961v-80.712c0-67.091-54.565-121.68-121.655-121.68h-80.689c5.908-12.744 9.961-27.149 9.961-42.627C440.772 55.712 385.059 0 316.602 0 248.12 0 192.408 55.712 192.408 124.17c0 15.478 4.053 29.883 9.936 42.627H121.68C54.59 166.797 0 221.387 0 288.477l.073 37.231H0l.122 52.783c0 35.986 13.403 57.543 19.751 65.723 19.093 24.683 42.335 28.394 54.518 28.394 18.676 0 36.157-7.739 51.879-22.974l1.416-.659 2.369-3.345c2.173-2.124 9.887-8.569 21.9-8.594 25.537 0 46.337 20.776 46.337 46.362 0 25.538-20.801 46.338-46.362 46.338-11.988 0-19.702-6.445-21.875-8.594l-2.369-3.345-1.416-.66c-15.723-15.234-33.203-22.973-51.88-22.973-12.182.025-35.424 3.711-54.517 28.394C13.525 530.761.122 552.294.122 588.281L0 641.064h.073L0 678.223C0 745.411 54.59 800 121.68 800h85.254v-.098l4.761-.025c35.963 0 57.544-13.38 65.724-19.752 24.683-19.092 28.394-42.334 28.394-54.517 0-18.677-7.74-36.158-22.951-51.88l-.684-1.416-3.32-2.368c-2.149-2.174-8.619-9.888-8.619-21.9 0-25.538 20.802-46.338 46.363-46.338 25.537 0 46.337 20.802 46.337 46.338 0 12.012-6.47 19.726-8.594 21.9l-3.32 2.368-.684 1.416c-15.235 15.724-22.974 33.203-22.974 51.88 0 12.183 3.686 35.425 28.394 54.517 8.203 6.372 29.736 19.752 65.723 19.752l26.563.073v.05h63.451c67.091 0 121.655-54.591 121.655-121.68v-80.689c12.794 5.885 27.197 9.961 42.677 9.961 68.458 0 124.17-55.712 124.17-124.194 0-68.456-55.712-124.17-124.17-124.17Zm0 197.608c-29.736 0-58.546-34.473-58.546-34.473-5.225-5.005-9.986-7.521-14.453-7.521-4.443 0-8.545 2.514-12.403 7.521 0 0-8.008 9.204-8.008 30.176V678.32c0 39.161-31.739 70.924-70.923 70.924h-37.208l-52.808-.122c-24.122 0-34.669-9.18-34.669-9.18-5.785-4.467-8.692-9.18-8.692-14.331 0-5.103 2.905-10.62 8.692-16.553 0 0 26.905-21.705 26.905-61.011 0-53.614-43.506-97.119-97.119-97.119-53.662 0-97.118 43.506-97.118 97.119 0 39.306 26.904 61.011 26.904 61.011 5.763 5.933 8.643 11.45 8.643 16.553 0 5.151-2.882 9.864-8.643 14.331 0 0-10.571 9.18-34.692 9.18l-52.808.122H121.68c-39.161 0-70.899-31.763-70.899-70.924l.147-75.317h-.073l.025-14.722c0-24.097 9.18-34.692 9.18-34.692 4.467-5.786 9.18-8.642 14.306-8.642 5.126 0 10.645 2.856 16.576 8.642 0 0 21.705 26.928 61.011 26.928 53.614-.025 97.119-43.506 97.119-97.119-.025-53.662-43.506-97.118-97.119-97.118-39.306 0-61.01 26.904-61.01 26.904-5.934 5.763-11.45 8.643-16.577 8.643-5.127 0-9.84-2.857-14.307-8.643 0 0-9.18-10.595-9.18-34.692v-1.806h.05l-.148-88.209c0-39.161 31.74-70.899 70.899-70.899h125.781c20.972 0 30.177-8.008 30.177-8.008 10.034-7.715 10.034-16.454 0-26.856 0 0-34.474-28.809-34.474-58.545 0-40.552 32.886-73.413 73.438-73.413 40.528 0 73.412 32.861 73.412 73.413 0 29.736-34.448 58.545-34.448 58.545-10.06 10.4-10.06 19.141 0 26.856 0 0 9.179 8.008 30.126 8.008h125.806c39.185 0 70.924 31.739 70.924 70.899v125.806c0 20.972 8.008 30.151 8.008 30.151 3.858 5.03 7.959 7.521 12.403 7.521 4.467 0 9.228-2.491 14.453-7.521 0 0 28.809-34.448 58.545-34.448 40.528 0 73.389 32.886 73.389 73.412-.001 40.577-32.862 73.438-73.39 73.438Z"/>
+                                  </svg>
+                            </span>
                             Projects
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span><img src="images/puzzle-white.svg" alt="backlog" width="24px"></span>
+                            <span>
+                                <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                                    <path fill="currentColor" d="M166.667 166.667h466.666V150c0-27.614-22.385-50-50-50H216.667c-27.615 0-50 22.386-50 50v16.667Zm-33.334 16.666V150c0-46.024 37.31-83.333 83.334-83.333h366.666c46.024 0 83.334 37.309 83.334 83.333v33.333c0 9.205-7.462 16.667-16.667 16.667H150c-9.205 0-16.667-7.462-16.667-16.667Zm0 166.667V250c0-9.205 7.462-16.667 16.667-16.667h500c9.205 0 16.667 7.462 16.667 16.667v100c0 9.205-7.462 16.667-16.667 16.667H150c-9.205 0-16.667-7.462-16.667-16.667Zm33.334-16.667h466.666v-66.666H166.667v66.666ZM200 516.667v-100c0-9.205 7.462-16.667 16.667-16.667h500c9.204 0 16.666 7.462 16.666 16.667v100c0 9.204-7.462 16.666-16.666 16.666h-500c-9.205 0-16.667-7.462-16.667-16.666ZM233.333 500H700v-66.667H233.333V500Zm-100 116.667v-33.334c0-9.204 7.462-16.666 16.667-16.666h500c9.205 0 16.667 7.462 16.667 16.666v33.334c0 46.023-37.31 83.333-83.334 83.333H216.667c-46.024 0-83.334-37.31-83.334-83.333ZM166.667 600v16.667c0 27.614 22.385 50 50 50h366.666c27.615 0 50-22.386 50-50V600H166.667Z"/>
+                                </svg>
+                            </span>
                             Backlog
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                            <span>
+                                <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                                    <path stroke="#000" stroke-linecap="round" stroke-width="50" d="M700 238.743c0-34.786 0-52.179-9.437-65.273-9.44-13.095-25.94-18.595-58.94-29.595l-38.826-12.942c-45.57-15.19-68.354-22.785-91.294-19.713-22.94 3.072-42.923 16.394-82.893 43.039l-46.077 30.72c-31.203 20.801-46.803 31.201-64.305 35.338a99.924 99.924 0 0 1-19.591 2.624c-17.974.614-35.762-5.315-71.337-17.174-46.597-15.532-69.896-23.298-87.624-15.412a49.996 49.996 0 0 0-16.588 11.957C100 216.636 100 241.195 100 290.313v135.474m600-59.12V509.69c0 49.117 0 73.677-13.087 88a49.98 49.98 0 0 1-16.59 11.957c-17.726 7.886-41.026.12-87.623-15.414-35.577-11.856-53.363-17.786-71.337-17.173-6.6.227-13.163 1.103-19.59 2.623-17.503 4.137-33.103 14.537-64.306 35.34L381.39 645.74c-39.97 26.647-59.953 39.97-82.892 43.04-22.94 3.073-45.725-4.523-91.295-19.713l-38.826-12.94c-33.001-11-49.501-16.5-58.939-29.597-8.936-12.397-9.411-28.647-9.437-59.863m399.999-450v116.666m0 333.334v-200M300 683.333V566.667m0-333.334v200"/>
+                                </svg>
+                            </span>
                             Sprint map
                         </a>
                     </li>
@@ -72,10 +82,14 @@
                     <h4>
                         <span>Admin</span>
                     </h4>
-
                     <li>
                         <a href="#">
-                            <span><img src="images/puzzle-white.svg" alt="manage-users" width="24px"></span>
+                            <span>
+                                <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="721" height="496" fill="none" viewBox="0 0 721 496">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M437.562 96.992c-.036 40.269-32.704 72.888-72.97 72.864-40.269-.024-72.899-32.681-72.886-72.95C291.718 56.639 324.365 24 364.634 24a72.957 72.957 0 0 1 51.58 21.392 72.97 72.97 0 0 1 21.348 51.6Zm2.336 180.416h-150.4c-52.547 1.651-94.289 44.723-94.289 97.296 0 52.573 41.742 95.645 94.289 97.296h150.4c52.544-1.651 94.284-44.723 94.284-97.296 0-52.573-41.74-95.645-94.284-97.296ZM622.01 152.769c-.02 30.8-24.999 55.756-55.799 55.743-30.8-.01-55.76-24.986-55.753-55.786.006-30.8 24.976-55.765 55.776-55.765a55.776 55.776 0 0 1 55.776 55.808Zm-523.328-.001c0 30.804 24.971 55.776 55.776 55.776 30.804 0 55.776-24.972 55.776-55.776 0-30.804-24.972-55.776-55.776-55.776-30.805 0-55.776 24.972-55.776 55.776Z" clip-rule="evenodd"/>
+                                    <path fill="currentColor" d="M581.978 274.848c-13.255 0-24 10.746-24 24s10.745 24 24 24v-48Zm41.824 24 .496-23.994c-.167-.006-.33-.006-.496-.006v24Zm0 148.832v24c.166 0 .329-.003-.496-.006l-.496-23.994Zm-41.824-24c-13.255 0-24 10.746-24 24s10.745 24 24 24v-48ZM138.713 322.848c13.255 0 24-10.746 24-24s-10.745-24-24-24v48Zm-41.824-24v-24c-.166 0-.332 0-.498.006l.498 23.994Zm0 148.832-.498 23.994c.166.003.332.006-.498.006v-24Zm41.824 24c13.255 0 24-10.746 24-24s-10.745-24-24-24v48Zm443.265-148.832h41.824v-48h-41.824v48Zm41.324-.006c27.44.569 49.386 22.976 49.386 50.422h48c0-53.568-42.835-97.299-96.39-98.41l-.996 47.988Zm49.386 50.422c0 27.446-21.946 49.853-49.386 50.422l.996 47.988c53.555-1.111 96.39-44.842 96.39-98.41h-48Zm-48.886 50.416h-41.824v48h41.824v-48ZM138.713 274.848H96.889v48h41.824v-48Zm-42.322.006C42.835 275.965 0 319.696 0 373.264h48c0-27.446 21.947-49.853 49.386-50.422l-.995-47.988ZM0 373.264c0 53.568 42.836 97.299 96.391 98.41l.995-47.988C69.946 423.117 48 400.71 48 373.264H0Zm96.889 98.416h41.824v-48H96.889v48Z"/>
+                                </svg>
+                            </span>
                             Manage users
                         </a>
                     </li>
@@ -83,19 +97,33 @@
                         <span>Account</span>
                         <li>
                             <a href="#">
-                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                <span>
+                                    <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                                        <path fill="currentColor" d="M676.624 676.074a411.64 411.64 0 0 0-550.971-6.617l-34.579-39.234a463.955 463.955 0 0 1 620.965 7.324l-35.415 38.527Z"/>
+                                        <path fill="currentColor" d="M397.437 228.993a129.73 129.73 0 0 1 127.239 155.043 129.733 129.733 0 0 1-256.971-25.31 129.89 129.89 0 0 1 129.732-129.733Zm0-52.311A182.037 182.037 0 0 0 229.251 289.06a182.036 182.036 0 0 0-10.359 105.181 182.039 182.039 0 0 0 248.211 132.672 182.045 182.045 0 0 0-69.666-350.231Z"/>
+                                        <path fill="currentColor" d="M400 52.39a347.69 347.69 0 0 1 321.222 214.634 347.681 347.681 0 0 1-75.37 378.907A347.688 347.688 0 0 1 52.311 400.078 348.08 348.08 0 0 1 400 52.39Zm0-52.312A400.002 400.002 0 0 0 7.686 478.114a399.997 399.997 0 0 0 314.278 314.279 400 400 0 0 0 478.035-392.315 400.004 400.004 0 0 0-117.156-282.843A400.002 400.002 0 0 0 400 .078Z"/>
+                                      </svg>
+                                </span>
                                 Profile
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="680" height="718" fill="none" viewBox="0 0 680 718">
+                                    <path stroke="#000" stroke-width="50" d="M340 459c55.228 0 100-44.772 100-100s-44.772-100-100-100-100 44.772-100 100 44.772 100 100 100Z"/>
+                                    <path stroke="#000" stroke-width="50" d="M398.847 30.741c-12.254-5.074-27.784-5.074-58.847-5.074-31.063 0-46.593 0-58.847 5.074a66.672 66.672 0 0 0-36.079 36.08c-3.088 7.457-4.297 16.129-4.77 28.779-.695 18.589-10.229 35.796-26.339 45.098-16.11 9.301-35.779 8.953-52.225.261-11.192-5.916-19.306-9.205-27.309-10.258a66.664 66.664 0 0 0-49.286 13.206c-10.52 8.072-18.286 21.523-33.817 48.424C35.796 219.232 28.03 232.683 26.3 245.83a66.67 66.67 0 0 0 13.206 49.287c4.913 6.403 11.817 11.783 22.534 18.516 15.753 9.9 25.89 26.764 25.889 45.367-.001 18.603-10.137 35.463-25.89 45.36-10.717 6.737-17.623 12.12-22.536 18.523a66.66 66.66 0 0 0-13.206 49.284c1.73 13.146 9.496 26.6 25.027 53.5 15.532 26.9 23.298 40.353 33.818 48.423a66.678 66.678 0 0 0 49.286 13.207c8.002-1.054 16.116-4.344 27.307-10.257 16.447-8.693 36.117-9.04 52.228.26 16.112 9.303 25.646 26.51 26.341 45.103.473 12.647 1.682 21.32 4.77 28.777a66.682 66.682 0 0 0 36.079 36.08c12.254 5.073 27.784 5.073 58.847 5.073 31.063 0 46.593 0 58.847-5.073a66.667 66.667 0 0 0 36.076-36.08c3.09-7.457 4.3-16.13 4.774-28.78.693-18.59 10.226-35.797 26.336-45.1 16.11-9.303 35.78-8.953 52.23-.26 11.19 5.913 19.304 9.2 27.304 10.253a66.656 66.656 0 0 0 49.286-13.203c10.52-8.073 18.287-21.523 33.817-48.427 15.533-26.9 23.3-40.35 25.03-53.496a66.671 66.671 0 0 0-13.207-49.287c-4.913-6.403-11.82-11.787-22.536-18.52-15.75-9.897-25.887-26.76-25.887-45.363 0-18.604 10.137-35.46 25.887-45.357 10.72-6.737 17.626-12.117 22.54-18.523a66.669 66.669 0 0 0 13.206-49.285c-1.73-13.147-9.496-26.598-25.03-53.499-15.53-26.901-23.296-40.351-33.816-48.424a66.666 66.666 0 0 0-49.287-13.206c-8 1.053-16.113 4.342-27.307 10.257-16.446 8.693-36.116 9.041-52.226-.261-16.114-9.302-25.647-26.51-26.34-45.101-.474-12.649-1.684-21.32-4.774-28.777a66.657 66.657 0 0 0-36.076-36.08Z"/>
+                                </svg>
                                 Settings
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span><img src="images/puzzle-white.svg" alt="TODOOOOOO" width="24px"></span>
+                                <span>
+                                    <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                                        <path stroke="#1C274C" stroke-linecap="round" stroke-linejoin="round" stroke-width="50" d="M333.333 400h333.334m0 0-100-100m100 100-100 100"/>
+                                        <path stroke="#1C274C" stroke-linecap="round" stroke-width="50" d="M133.333 400c0-147.276 119.391-266.667 266.667-266.667m0 533.334c-84.213 0-159.308-39.037-208.179-100"/>
+                                      </svg>
+                                </span>
                                 Logout
                             </a>
                         </li>
@@ -121,242 +149,19 @@
             </div>
 
             <div class="main-content">
-                <div class="sprint-list">
-
-
-
-
-                    <div class="sprint">
-                        <div class="sprint-header">
-                            <div class="sprint-main-info">
-                                <div class="sprint-data">
-                                    <div class="hide-sprint-main-info-button">
-                                        <svg class="expand-sprint-content-button-svg" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
-                                            <g clip-path="url(#a)">
-                                              <path fill="#000" d="M789.35 192.468c-14.198-14.199-37.224-14.201-51.425.002L400.01 530.393 62.078 192.468c-14.2-14.199-37.225-14.201-51.426.002-14.201 14.202-14.201 37.225 0 51.426l363.646 363.636a36.36 36.36 0 0 0 51.423-.002l363.627-363.637c14.204-14.198 14.204-37.224.002-51.425Z"/>
-                                            </g>
-                                            <defs>
-                                              <clipPath id="a">
-                                                <path fill="#fff" d="M0 0h800v800H0z"/>
-                                              </clipPath>
-                                            </defs>
-                                        </svg>
-                                          
-                                          
-                                    </div>
-                                    <div class="sprint-name">PUNBA 119 + date</div>
-                                    <div class="sprint-dates">test</div>
-                                    <div class="sprint-issues-amount">22 issues</div>
-                                    <div class="sprint-label">Active</div>
-                                </div>
-
-
-
-                                <div class="sprint-container-with-tasks-status-or-manage-sprint">
-                                    <div class="not-started-tasks">0</div>
-                                    <div class="in-progress-tasks">5</div>
-                                    <div class="done-tasks">3</div>
-                                </div>
-                            </div>
-
-
-                            <div class="sprint-participants">
-                                <img src="images/man.jpg" alt="participant">
-                                <img src="images/man.jpg" alt="participant">
-                                <img src="images/man.jpg" alt="participant">
-                                <img src="images/man.jpg" alt="participant">
-                                <img src="images/man.jpg" alt="participant">
-                            </div>
-                        </div>
-
-                        <div class="sprint-content">
-                            <div class="task-list-container">
-
-
-
-                                <div class="task">
-                                    <div class="task-header">
-                                        <div class="task-priority"></div>
-                                        <div class="task-summary">Implement connector for handling ERROR006 and testing</div>
-                                        <div class="task-status">Done</div>
-                                    </div>
-
-
-                                    <div class="task-details">
-                                        <div class="task-due-date">Due: Nov 27</div>
-                                        <div class="comments-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="672" fill="none" viewBox="0 0 800 672">
-                                                <path fill="#C3CAD3" stroke="#C3CAD3" stroke-width="4" d="M400.004 2.068C179.084 2.068 0 127.544 0 282.352c0 72.072 38.88 137.756 102.68 187.404 14.884 11.58 21.784 30.74 17.696 49.144L92.888 642.604a22.454 22.454 0 0 0 9.264 23.42 22.449 22.449 0 0 0 25.188.088l147.636-99.216a62.979 62.979 0 0 1 44.128-10.064c26.128 3.78 53.176 5.792 80.904 5.792 220.908 0 399.996-125.48 399.996-280.276-.004-154.804-179.088-280.28-400-280.28Z"/>
-                                              </svg>
-                                        </div>
-                                        <div class="comments-amount">7</div>
-                                        <div class="task-files-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="108" fill="none" viewBox="0 0 116 108">
-                                                <path fill="#C3CAD3" d="M109.623 7.31C105.511 3.198 100.035.934 94.204.934c-5.83 0-11.306 2.264-15.418 6.376L21.01 65.085l-.514.525.031.03a14.578 14.578 0 0 0-3.449 9.439 14.54 14.54 0 0 0 4.287 10.349 14.537 14.537 0 0 0 10.349 4.279c3.914 0 7.589-1.52 10.349-4.28l37.909-38.014s1.693-1.649.312-3.164c-.505-.553-1.55-1.645-2.17-2.065-1.619-1.1-3.03.342-3.03.342L37.177 80.54a7.668 7.668 0 0 1-5.46 2.258 7.674 7.674 0 0 1-5.463-2.258 7.673 7.673 0 0 1-2.262-5.461c0-2.058.8-3.994 2.25-5.45l57.43-57.431a14.794 14.794 0 0 1 10.532-4.354c3.983 0 7.723 1.546 10.531 4.354a14.79 14.79 0 0 1 4.355 10.531 14.79 14.79 0 0 1-4.355 10.531L46.952 91.027l-2.72 2.738c-4.122 4.122-9.611 6.392-15.457 6.392s-11.337-2.27-15.46-6.392a21.724 21.724 0 0 1-6.403-15.46 21.716 21.716 0 0 1 6.403-15.457l33.56-33.781s1.406-1.298.16-2.663c-.708-.775-1.895-2.03-2.609-2.617-1.238-1.02-2.469.423-2.469.423L8.427 57.96C2.994 63.395 0 70.62 0 78.307s2.993 14.912 8.428 20.346c5.425 5.426 12.65 8.414 20.345 8.414 7.694 0 14.92-2.988 20.346-8.414l60.504-60.504c4.112-4.113 6.377-9.589 6.377-15.42 0-5.83-2.265-11.307-6.377-15.419Z"/>
-                                              </svg>
-                                        </div>
-                                        <div class="files-amount">3</div>
-                                        <div class="avatar-and-estimation-container">
-                                            <div class="task-assignee-avatar"></div>
-                                            <div class="task-estimation">2</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="create-issue-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 50 50">
-                                    <path stroke="#161928" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" d="M4 25h42M25 4v42"/>
-                                </svg>
-                                 Create issue
-                            </div>
-                            <div class="sprint-estimation">
-                                Total sprint estimation
-                                <div class="sprint-estimation-number">19</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-                    <div class="sprint">
-                        <div class="sprint-header">
-                            <div class="sprint-main-info">
-
-                                <div class="sprint-data">
-                                    <div class="hide-sprint-main-info-button">
-                                        <svg class="expand-sprint-content-button-svg" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
-                                            <g clip-path="url(#a)">
-                                              <path fill="#000" d="M789.35 192.468c-14.198-14.199-37.224-14.201-51.425.002L400.01 530.393 62.078 192.468c-14.2-14.199-37.225-14.201-51.426.002-14.201 14.202-14.201 37.225 0 51.426l363.646 363.636a36.36 36.36 0 0 0 51.423-.002l363.627-363.637c14.204-14.198 14.204-37.224.002-51.425Z"/>
-                                            </g>
-                                            <defs>
-                                              <clipPath id="a">
-                                                <path fill="#fff" d="M0 0h800v800H0z"/>
-                                              </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </div>
-                                    <div class="sprint-name">Project name + date</div>
-                                    <div class="sprint-dates">test</div>
-                                    <div class="sprint-issues-amount">22 issues</div>
-                                    <div class="sprint-label">Active</div>
-                                </div>
-
-
-
-                                <div class="sprint-container-with-tasks-status-or-manage-sprint">
-                                    <div class="not-started-tasks">0</div>
-                                    <div class="in-progress-tasks">5</div>
-                                    <div class="done-tasks">3</div>
-                                </div>
-                            </div>
-
-
-                            <div class="sprint-participants">
-                                <img src="images/logo.png" alt="participant">
-                                <img src="images/logo.png" alt="participant">
-                                <img src="images/logo.png" alt="participant">
-                                <img src="images/logo.png" alt="participant">
-                                <img src="images/logo.png" alt="participant">
-                                <img src="images/logo.png" alt="participant">
-                            </div>
-                        </div>
-                        <div class="sprint-content">
-                            Sprint 1, 9 issuesБ<br>
-                            Sprint 1, 9 issuesБ<br>
-                            Sprint 1, 9 issuesБ<br>
-                            Sprint 1, 9 issuesБ<br>
-                            Sprint 1, 9 issuesБ<br>
-                            Sprint 1, 9 issuesБ<br>
-                        </div>
-                    </div>
-
-                    <div class="sprint">
-                        <div class="sprint-header">
-                            <div class="sprint-main-info">
-
-                                <div class="sprint-data">
-                                    <div class="hide-sprint-main-info-button">
-                                        <svg class="expand-sprint-content-button-svg" xmlns="http://www.w3.org/2000/svg" width="800" height="800" fill="none" viewBox="0 0 800 800">
-                                            <g clip-path="url(#a)">
-                                              <path fill="#000" d="M789.35 192.468c-14.198-14.199-37.224-14.201-51.425.002L400.01 530.393 62.078 192.468c-14.2-14.199-37.225-14.201-51.426.002-14.201 14.202-14.201 37.225 0 51.426l363.646 363.636a36.36 36.36 0 0 0 51.423-.002l363.627-363.637c14.204-14.198 14.204-37.224.002-51.425Z"/>
-                                            </g>
-                                            <defs>
-                                              <clipPath id="a">
-                                                <path fill="#fff" d="M0 0h800v800H0z"/>
-                                              </clipPath>
-                                            </defs>
-                                        </svg>
-                                          
-                                    </div>
-                                    <div class="sprint-name">PUmBA 109: 16.05.-30.05.24</div>
-                                    <div class="sprint-dates">test</div>
-                                    <div class="sprint-issues-amount">22 issues</div>
-                                    <div class="sprint-label">Active</div>
-                                </div>
-
-
-
-                                <div class="sprint-container-with-tasks-status-or-manage-sprint">
-                                    <div class="not-started-tasks">0</div>
-                                    <div class="in-progress-tasks">5</div>
-                                    <div class="done-tasks">3</div>
-                                </div>
-                            </div>
-
-
-                            <div class="sprint-participants">participants</div>
-                        </div>
-                        <div class="sprint-content">
-                            
-                            <div class="task-container">task 1</div>
-                        
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="backlog" class="sprint">
-                    <div class="sprint-header">
-                        <div class="sprint-main-info">
-                            <div class="sprint-data">
-                                <div class="sprint-name">Backlog</div>
-                                <div class="sprint-issues-amount">22 issues</div>
-                            </div>
-
-                            <div class="sprint-container-with-tasks-status-or-manage-sprint">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sprint-content">
-                        <div class="task-list-container">
-                            backlog task 1<br>
-                            backlog task 1<br>
-                            backlog task 1<br>
-                            backlog task 1<br>
-                            backlog task 1<br>
-                            backlog task 1<br>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="sprint-list"></div>
+                <div id="backlog" class="sprint"></div>
             </div>
         </main>
     </div>
 
+
+    <!-- container that will be shown while :hover on all projects -->
     <div class="list-of-projects-container">
         <div class="list-of-projects-header">
             <h3>ALL PROJECTS </h3>
         </div>
-        <div class="list-of-projects">
-        </div>
+        <div class="list-of-projects"></div>
         <div class="add-new-project-container">
             <button class="add-new-project">Add new project</button>
         </div>
@@ -365,56 +170,6 @@
 
     <!-- overlay -->
     <div id="overlay"></div>
-
-
-    <!-- sections for create dialogues -->
-
-    <!-- basic -->
-    <section class="create-dialogue-section">
-        <header class="create-dialogue-header"><h2></h2></header>
-        <div class="create-dialogue-content"></div>
-        <footer class="create-dialogue-footer">
-            <button class="create-dialogue-cancel-button">Cancel</button>
-            <button class="create-dialogue-create-button">Create</button>
-        </footer>
-    </section>
-
-    <!-- sprint -->
-    <section id="create-sprint-section" class="create-dialogue-section">
-        <header class="create-dialogue-header"><h2>Create Sprint</h2></header>
-        <div class="create-dialogue-content">
-            <div class="sprint-name-in-create-dialogue">Pumba 119</div>
-            <div class="sprint-status-in-create-dialogue">Status: Future</div>
-            <div class="sprint-dates-in-create-dialogue">Dates: 2021-11-01 - 2021-11-15</div>
-            StartDate: 2021-11-01<br>
-            EndDate: 2021-11-15<br>
-
-        </div>
-        <footer class="create-dialogue-footer">
-            <button class="create-dialogue-cancel-button">Cancel</button>
-            <button class="create-dialogue-create-button">Create</button>
-        </footer>
-    </section>
-
-    <!-- task -->
-    <section id="create-task-section" class="create-dialogue-section">
-        <header class="create-dialogue-header"><h2>Create Task</h2></header>
-        <div class="create-dialogue-content"></div>
-        <footer class="create-dialogue-footer">
-            <button class="create-dialogue-cancel-button">Cancel</button>
-            <button class="create-dialogue-create-button">Create</button>
-        </footer>
-    </section>
-
-    <!-- project -->
-    <section id="create-project-section" class="create-dialogue-section">
-        <header class="create-dialogue-header"><h2>Create Project</h2></header>
-        <div class="create-dialogue-content"></div>
-        <footer class="create-dialogue-footer">
-            <button class="create-dialogue-cancel-button">Cancel</button>
-            <button class="create-dialogue-create-button">Create</button>
-        </footer>
-    </section>
 
     <script type="module" src="script.js"></script>
 </body>
